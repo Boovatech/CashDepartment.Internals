@@ -33,9 +33,9 @@
 
         <StackPanel Orientation="Horizontal">
             <Label Content="Транзакция:" VerticalAlignment="Center"/>
-            <ComboBox MinWidth="100" Margin="10,0,0,0" VerticalAlignment="Center" ItemsSource="{Binding TransactionEventsList}" SelectedItem="{Binding TransactionEventsSelectedItem}"/>
+            <ComboBox MinWidth="100" Margin="10,0,0,0" VerticalAlignment="Center" ItemsSource="{Binding TransactionEventsList}" SelectedItem="{Binding TransactionEventsSelectedItem}" SelectedIndex="0"/>
             <Label Content="ODB Type:" Margin="30,0,0,0" VerticalAlignment="Center"/>
-            <ComboBox MinWidth="100" Margin="10,0,0,0" VerticalAlignment="Center" ItemsSource="{Binding TransactionExportODBTypeList}" SelectedItem="{Binding TransactionExportODBTypeSelectedItem}"/>
+            <ComboBox MinWidth="100" Margin="10,0,0,0" VerticalAlignment="Center" ItemsSource="{Binding TransactionExportODBTypeList}" SelectedItem="{Binding TransactionExportODBTypeSelectedItem}" SelectedIndex="0"/>
             <Button Content="Add" Margin="30,0,0,0" VerticalAlignment="Center" Command="{Binding AddNewTransactionEventCommand}"/>
         </StackPanel>
 

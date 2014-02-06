@@ -76,9 +76,9 @@
                                         <DataGrid ItemsSource="{Binding Params}" AutoGenerateColumns="False" GridLinesVisibility="All" RowHeaderWidth="0"  HorizontalAlignment="Left" CanUserAddRows="False" CanUserResizeRows="False" CanUserDeleteRows="True" HeadersVisibility="None" CellStyle="{DynamicResource DataGridCellStyle1}">
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Binding="{Binding AdditionalParams}" Width="{Binding Source={x:Reference colAdditionalParams}, Path=Width, Mode=TwoWay}"/>
-                                                <!--<DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumBusinessProcessSourceType}}" SelectedValueBinding="{Binding DebitSource}" Width="{Binding Source={x:Reference colDebitSource}, Path=Width, Mode=TwoWay}"/>-->
+                                                <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumBusinessProcessSourceType}}" SelectedValueBinding="{Binding DebitSource}" Width="{Binding Source={x:Reference colDebitSource}, Path=Width, Mode=TwoWay}"/>
                                                 <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumAccountType}}" SelectedValueBinding="{Binding DebitType}" Width="{Binding Source={x:Reference colDebitType}, Path=Width, Mode=TwoWay}"/>
-                                                <!--<DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumBusinessProcessSourceType}}" SelectedValueBinding="{Binding CreditSource}" Width="{Binding Source={x:Reference colCreditSource}, Path=Width, Mode=TwoWay}"/>-->
+                                                <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumBusinessProcessSourceType}}" SelectedValueBinding="{Binding CreditSource}" Width="{Binding Source={x:Reference colCreditSource}, Path=Width, Mode=TwoWay}"/>
                                                 <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumAccountType}}" SelectedValueBinding="{Binding CreditType}" Width="{Binding Source={x:Reference colCreditType}, Path=Width, Mode=TwoWay}"/>
                                                 <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumTransactionAmount}}" SelectedValueBinding="{Binding Amount}" Width="{Binding Source={x:Reference colAmount}, Path=Width, Mode=TwoWay}"/>
                                                 <DataGridCheckBoxColumn Binding="{Binding IsUnion}" Width="{Binding Source={x:Reference colIsUnion}, Path=Width, Mode=TwoWay}"/>
@@ -227,9 +227,9 @@
             <DataGrid AutoGenerateColumns="False" Margin="10,0,0,0" GridLinesVisibility="All" RowHeaderWidth="0">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="colAdditionalParams" Header="AdditionalParams" />
-                    <!--<DataGridTextColumn x:Name="colDebitSource" Header="DebitSource" />-->
+                    <DataGridTextColumn x:Name="colDebitSource" Header="DebitSource" />
                     <DataGridTextColumn x:Name="colDebitType" Header="DebitType" />
-                    <!--<DataGridTextColumn x:Name="colCreditSource" Header="CreditSource" />-->
+                    <DataGridTextColumn x:Name="colCreditSource" Header="CreditSource" />
                     <DataGridTextColumn x:Name="colCreditType" Header="CreditType" />
                     <DataGridTextColumn x:Name="colAmount" Header="Amount" />
                     <DataGridTextColumn x:Name="colIsUnion" Header="IsUnion" />

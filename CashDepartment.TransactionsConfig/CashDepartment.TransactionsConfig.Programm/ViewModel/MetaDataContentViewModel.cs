@@ -73,7 +73,6 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
                         break;
                 }
             //}
-
         }
 
         private async void InterbankInit()
@@ -106,7 +105,9 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
                     break;
                 case BusinessProcessSourceType.Interbank:
                     var dataList = arg as BindingListEx<TransactionMetadata>;
-                    dataList.Add(new InterbankEncashTransactionMetadata());
+                    var meta = new InterbankEncashTransactionMetadata();
+                    meta.Params = new BindingListEx<TransactionMetadataParams>();
+                    dataList.Add(meta);
                     break;
                 case BusinessProcessSourceType.Terminal:
                     break;
