@@ -94,7 +94,7 @@
                                                 <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumPaymentPurposeType}}" SelectedValueBinding="{Binding PaymentPurpose}" Width="{Binding Source={x:Reference colPaymentPurpose}, Path=Width, Mode=TwoWay}"/>
                                             </DataGrid.Columns>
                                         </DataGrid>
-                                        <Button Content="Add new row" Grid.Row="2"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Command="{Binding RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}, Path=DataContext.AddNewRowCommand}" CommandParameter="{Binding Params}"/>
+                                        <mui:ModernButton IconData="F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z " Grid.Row="2"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Command="{Binding RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}, Path=DataContext.AddNewRowCommand}" CommandParameter="{Binding Params}"/>
                                     </StackPanel>
                                     
                                 </DataTemplate>
