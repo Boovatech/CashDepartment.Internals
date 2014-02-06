@@ -1,4 +1,4 @@
-﻿using CashDepartment.TransactionsConfig.Programm.Data;
+﻿using CashDepartment.TransactionsConfig.Shell.Data;
 using FirstFloor.ModernUI.Presentation;
 using Microsoft.Win32;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CashDepartment.TransactionsConfig.Programm.ViewModel
+namespace CashDepartment.TransactionsConfig.Shell.ViewModel
 {
     public class HomeViewModel
     {

@@ -1,6 +1,6 @@
-﻿namespace CashDepartment.TransactionsConfig.Programm.Content
+﻿namespace CashDepartment.TransactionsConfig.Shell.Content
 {
-    using CashDepartment.TransactionsConfig.Programm.ViewModel;
+    using CashDepartment.TransactionsConfig.Shell.ViewModel;
 using FirstFloor.ModernUI.Windows;
 using System;
 using System.Collections.Generic;

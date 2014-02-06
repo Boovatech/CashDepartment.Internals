@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace CashDepartment.TransactionsConfig.Programm.Data
+namespace CashDepartment.TransactionsConfig.Shell.Data
 {
     public class NullToStringConverter : IValueConverter
     {

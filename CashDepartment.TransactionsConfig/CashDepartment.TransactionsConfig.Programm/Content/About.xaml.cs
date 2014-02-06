@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CashDepartment.TransactionsConfig.Programm.Content
+namespace CashDepartment.TransactionsConfig.Shell.Content
 {
     /// <summary>
     /// Interaction logic for About.xaml

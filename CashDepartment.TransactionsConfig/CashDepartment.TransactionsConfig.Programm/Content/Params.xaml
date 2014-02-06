@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="CashDepartment.TransactionsConfig.Programm.Content.Params"
+﻿<UserControl x:Class="CashDepartment.TransactionsConfig.Shell.Content.Params"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:myViewModel="clr-namespace:CashDepartment.TransactionsConfig.Programm.ViewModel"
+             xmlns:myViewModel="clr-namespace:CashDepartment.TransactionsConfig.Shell.ViewModel"
              xmlns:enum="clr-namespace:CashDepartment.WellKnownBusinessObjects;assembly=CashDepartment.WellKnownBusinessObjects"
 			 xmlns:enumCore="clr-namespace:CashDepartment.WellKnownBusinessObjects.Core;assembly=CashDepartment.WellKnownBusinessObjects"
 			 xmlns:enumTrans="clr-namespace:CashDepartment.Server.DomainModel.Enities.Transactions;assembly=CashDepartment.TransactionsConfig.Data"
@@ -73,7 +73,7 @@
 												<TextBlock Text="{Binding Introduction}" TextDecorations="Underline"/>
 											</Label.Content>
 											</Label>
-                                        <DataGrid ItemsSource="{Binding Params}" AutoGenerateColumns="False" GridLinesVisibility="All" RowHeaderWidth="0"  HorizontalAlignment="Left" CanUserAddRows="False" CanUserResizeRows="False" CanUserDeleteRows="False" HeadersVisibility="None" CellStyle="{DynamicResource DataGridCellStyle1}">
+                                        <DataGrid ItemsSource="{Binding Params}" AutoGenerateColumns="False" GridLinesVisibility="All" RowHeaderWidth="0"  HorizontalAlignment="Left" CanUserAddRows="False" CanUserResizeRows="False" CanUserDeleteRows="True" HeadersVisibility="None" CellStyle="{DynamicResource DataGridCellStyle1}">
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Binding="{Binding AdditionalParams}" Width="{Binding Source={x:Reference colAdditionalParams}, Path=Width, Mode=TwoWay}"/>
                                                 <!--<DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumBusinessProcessSourceType}}" SelectedValueBinding="{Binding DebitSource}" Width="{Binding Source={x:Reference colDebitSource}, Path=Width, Mode=TwoWay}"/>-->

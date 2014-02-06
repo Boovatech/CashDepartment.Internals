@@ -1,6 +1,6 @@
 ﻿using CashDepartment.Shared.ComponentModel;
 using CashDepartment.TransactionsConfig.Data;
-using CashDepartment.TransactionsConfig.Programm.Data;
+using CashDepartment.TransactionsConfig.Shell.Data;
 using CashDepartment.WellKnownBusinessObjects;
 using FirstFloor.ModernUI.Presentation;
 using System;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CashDepartment.TransactionsConfig.Programm.ViewModel
+namespace CashDepartment.TransactionsConfig.Shell.ViewModel
 {
     public class ParamsViewModel
     {
@@ -30,7 +30,7 @@ namespace CashDepartment.TransactionsConfig.Programm.ViewModel
             private set { this.dataCollection = value; }
         }
 
-        public RelayCommand AddNewRowCommand;
+        public RelayCommand AddNewRowCommand { get; set; }
 
         #endregion
 
@@ -105,8 +105,8 @@ namespace CashDepartment.TransactionsConfig.Programm.ViewModel
                 case BusinessProcessSourceType.Client:
                     break;
                 case BusinessProcessSourceType.Interbank:
-                    var dataList = arg as BindingListEx<TransactionMetadata>;
-                    dataList.Add(new InterbankEncashTransactionMetadata());
+                    var dataList = arg as BindingListEx<TransactionMetadataParams>;
+                    dataList.AddNew();
                     break;
                 case BusinessProcessSourceType.Terminal:
                     break;

@@ -1,4 +1,4 @@
-﻿using CashDepartment.TransactionsConfig.Programm.ViewModel;
+﻿using CashDepartment.TransactionsConfig.Shell.ViewModel;
 using FirstFloor.ModernUI.Windows;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CashDepartment.TransactionsConfig.Programm.Content
+namespace CashDepartment.TransactionsConfig.Shell.Content
 {
     /// <summary>
     /// Interaction logic for Params.xaml

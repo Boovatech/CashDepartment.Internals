@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace CashDepartment.TransactionsConfig.Programm
+namespace CashDepartment.TransactionsConfig.Shell
 {
     /// <summary>
     /// Interaction logic for App.xaml

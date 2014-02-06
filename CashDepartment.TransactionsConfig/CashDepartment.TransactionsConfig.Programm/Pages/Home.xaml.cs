@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CashDepartment.TransactionsConfig.Programm.Pages
+namespace CashDepartment.TransactionsConfig.Shell.Pages
 {
     /// <summary>
     /// Interaction logic for Home.xaml

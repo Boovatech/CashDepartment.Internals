@@ -1,6 +1,6 @@
 ﻿using CashDepartment.Shared.ComponentModel;
 using CashDepartment.TransactionsConfig.Data;
-using CashDepartment.TransactionsConfig.Programm.Data;
+using CashDepartment.TransactionsConfig.Shell.Data;
 using CashDepartment.WellKnownBusinessObjects;
 using FirstFloor.ModernUI.Presentation;
 using FirstFloor.ModernUI.Windows.Controls;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CashDepartment.TransactionsConfig.Programm.ViewModel
+namespace CashDepartment.TransactionsConfig.Shell.ViewModel
 {
     class MetaDataContentViewModel
     {

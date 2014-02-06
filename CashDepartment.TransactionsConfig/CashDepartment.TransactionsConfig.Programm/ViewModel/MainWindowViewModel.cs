@@ -1,4 +1,4 @@
-﻿namespace CashDepartment.TransactionsConfig.Programm.ViewModel
+﻿namespace CashDepartment.TransactionsConfig.Shell.ViewModel
 {
     using CashDepartment.TransactionsConfig.Data;
     using CashDepartment.WellKnownBusinessObjects;

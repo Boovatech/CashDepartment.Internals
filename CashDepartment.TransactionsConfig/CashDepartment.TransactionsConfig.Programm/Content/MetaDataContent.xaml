@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="CashDepartment.TransactionsConfig.Programm.Content.MetaDataContent"
+﻿<UserControl x:Class="CashDepartment.TransactionsConfig.Shell.Content.MetaDataContent"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,8 +8,8 @@
 			 xmlns:enumCore="clr-namespace:CashDepartment.WellKnownBusinessObjects.Core;assembly=CashDepartment.WellKnownBusinessObjects"
 			 xmlns:enumEnq="clr-namespace:CashDepartment.WellKnownBusinessObjects.Enquiries;assembly=CashDepartment.WellKnownBusinessObjects"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             xmlns:myViewModel="clr-namespace:CashDepartment.TransactionsConfig.Programm.ViewModel"
-             xmlns:myData="clr-namespace:CashDepartment.TransactionsConfig.Programm.Data"
+             xmlns:myViewModel="clr-namespace:CashDepartment.TransactionsConfig.Shell.ViewModel"
+             xmlns:myData="clr-namespace:CashDepartment.TransactionsConfig.Shell.Data"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -46,9 +46,9 @@
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="{Binding TransactionEvent}" FontWeight="Bold" Margin="0,10,0,10"/>
-                    <!--<Label Content="{Binding ODBType,Converter={StaticResource ODBTypeConv}}" FontWeight="Bold" Margin="20,0,0,0"/>-->
+                    <Label Content="{Binding ODBType}" FontWeight="Bold" Margin="50,10,0,10"/>
                 </StackPanel>
-                <DataGrid ItemsSource="{Binding Metadata}" AutoGenerateColumns="False" RowHeaderWidth="0" HeadersVisibility="None" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" Grid.Row="1" GridLinesVisibility="All" CellStyle="{DynamicResource DataGridCellStyle1}">
+                <DataGrid ItemsSource="{Binding Metadata}" AutoGenerateColumns="False" RowHeaderWidth="0" HeadersVisibility="None" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="True" Grid.Row="1" GridLinesVisibility="All" CellStyle="{DynamicResource DataGridCellStyle1}">
                     <DataGrid.Columns>
                         <!--<DataGridTemplateColumn>
                             <DataGridTemplateColumn.Header>
@@ -163,14 +163,14 @@
             <DataGrid AutoGenerateColumns="False" RowHeaderWidth="0" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="5,0,0,0" GridLinesVisibility="All">
             <DataGrid.Columns>
                 <DataGridComboBoxColumn x:Name="colResult" Header="Result" Width="100"/>
-                <DataGridCheckBoxColumn x:Name="colDefaultCurrency" Header="DefaultCurrency"/>
+                    <DataGridCheckBoxColumn x:Name="colDefaultCurrency" Header="DefaultCurrency"  Width="100"/>
                 <DataGridComboBoxColumn x:Name="colPartyType" Header="PartyType" Width="100"/>
-                <DataGridCheckBoxColumn x:Name="colIsOurBank" Header="IsOurBank" />
-                <DataGridCheckBoxColumn x:Name="colIsResident" Header="IsResident" />
+                    <DataGridCheckBoxColumn x:Name="colIsOurBank" Header="IsOurBank"  Width="100"/>
+                    <DataGridCheckBoxColumn x:Name="colIsResident" Header="IsResident"  Width="100"/>
                 <DataGridComboBoxColumn x:Name="colSolvency" Header="Solvency" Width="100" />
-                <DataGridCheckBoxColumn x:Name="colIsExchange" Header="IsExchange" />
-                <DataGridCheckBoxColumn x:Name="colIsDefaultCurrency" Header="IsDefaultCurrency" />
-                <DataGridCheckBoxColumn x:Name="colIsPrepaid" Header="IsPrepaid" />
+                    <DataGridCheckBoxColumn x:Name="colIsExchange" Header="IsExchange"  Width="100"/>
+                    <DataGridCheckBoxColumn x:Name="colIsDefaultCurrency" Header="IsDefaultCurrency"  Width="100"/>
+                    <DataGridCheckBoxColumn x:Name="colIsPrepaid" Header="IsPrepaid"  Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
         <ListView ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataCollection}" ItemTemplate="{DynamicResource ListViewMainDataTemplate1}" ItemContainerStyle="{DynamicResource ListViewItemStyle1}"/>

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace CashDepartment.TransactionsConfig.Programm.Data
+namespace CashDepartment.TransactionsConfig.Shell.Data
 {
     public class AllData
     {

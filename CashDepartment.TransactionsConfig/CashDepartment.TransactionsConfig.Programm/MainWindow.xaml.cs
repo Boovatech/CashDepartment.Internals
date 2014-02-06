@@ -1,6 +1,7 @@
-﻿namespace CashDepartment.TransactionsConfig.Programm
+﻿namespace CashDepartment.TransactionsConfig.Shell
 {
-    using CashDepartment.TransactionsConfig.Programm.ViewModel;
+    using CashDepartment.TransactionsConfig.Shell.ViewModel;
+    using CashDepartment.WellKnownBusinessObjects;
     using FirstFloor.ModernUI.Windows.Controls;
     using System;
     using System.Collections.Generic;
@@ -26,6 +27,7 @@
         {
             InitializeComponent();
 
+            WellKnownBusinessObjects.PersonalizableEnumConverterBase.Init();
             this.DataContext = new MainWindowViewModel(this.MenuLinkGroups);
         }
     }

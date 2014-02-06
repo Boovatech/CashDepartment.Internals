@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace CashDepartment.TransactionsConfig.Programm.Content
+namespace CashDepartment.TransactionsConfig.Shell.Content
 {
     /// <summary>
     /// A simple view model for configuring theme, font and accent colors.
