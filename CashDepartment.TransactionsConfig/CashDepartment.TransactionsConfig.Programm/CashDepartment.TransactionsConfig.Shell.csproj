@@ -74,6 +74,7 @@
       <DependentUpon>Params.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\AllData.cs" />
+    <Compile Include="Data\IntToVisibilityConverter.cs" />
     <Compile Include="Data\myODBTypeConv.cs" />
     <Compile Include="Data\myTransactionEventTypeConv.cs" />
     <Compile Include="Data\NullToStringConverter.cs" />

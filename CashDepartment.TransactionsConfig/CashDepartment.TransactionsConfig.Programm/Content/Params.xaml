@@ -10,6 +10,7 @@
 			 xmlns:enumTrans="clr-namespace:CashDepartment.Server.DomainModel.Enities.Transactions;assembly=CashDepartment.TransactionsConfig.Data"
              xmlns:enumTransW="clr-namespace:CashDepartment.WellKnownBusinessObjects.Transactions;assembly=CashDepartment.WellKnownBusinessObjects"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:myData="clr-namespace:CashDepartment.TransactionsConfig.Shell.Data"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -18,6 +19,9 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
+        
+        <myData:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
+        
         <ObjectDataProvider x:Key="EnumBusinessProcessSourceType" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
             <ObjectDataProvider.MethodParameters>
                 <x:Type Type="enum:BusinessProcessSourceType"/>
@@ -224,7 +228,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <DataGrid AutoGenerateColumns="False" Margin="10,0,0,0" GridLinesVisibility="All" RowHeaderWidth="0">
+            <DataGrid AutoGenerateColumns="False" Margin="10,0,0,0" GridLinesVisibility="All" RowHeaderWidth="0" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}">
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="colAdditionalParams" Header="AdditionalParams" />
                     <DataGridTextColumn x:Name="colDebitSource" Header="DebitSource" />
