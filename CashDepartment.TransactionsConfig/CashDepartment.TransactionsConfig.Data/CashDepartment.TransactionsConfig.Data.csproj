@@ -29,6 +29,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CashDepartment.Shared">
       <HintPath>..\..\lib\CashDepartment.Shared.dll</HintPath>
@@ -51,6 +54,7 @@
     <Compile Include="TransactionMetadataGroup.cs" />
     <Compile Include="TransactionMetadataParams.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

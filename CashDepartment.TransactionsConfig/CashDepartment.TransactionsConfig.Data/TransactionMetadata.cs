@@ -14,6 +14,7 @@
     /// <summary>
     /// The transaction metadata.
     /// </summary>
+    [System.Xml.Serialization.XmlInclude(typeof(InterbankEncashTransactionMetadata))]
     public abstract class TransactionMetadata : ValidatableUiFriendlyObject
     {
         /// <summary>
@@ -59,6 +60,18 @@
         /// Gets or sets the list of transaction parameters.
         /// </summary>
         public BindingListEx<TransactionMetadataParams> Params { get; set; }
+
+        /// <summary>
+        /// Краткое представление метаданных для View Params
+        /// </summary>
+        public virtual string Introduction {
+            get
+            {
+                return string.Format("EventResult: {0}, ForDefaultCurrency: {1}",
+                    this.EventResult.HasValue ? this.EventResult.Value.ToString() : "-",
+                    this.ForDefaultCurrency);
+            }
+        }
     }
 
     /// <summary>
@@ -195,6 +208,24 @@
         /// По предоплате?
         /// </summary>
         public bool? IsPrepaid { get; set; }
+
+        public override string Introduction
+        {
+            get
+            {
+                return 
+                    base.Introduction + 
+                    string.Format(", PartyType: {0}, IsOurBank: {1}, IsResident: {2}, Solvency: {3}, IsExchange: {4}, IsOwnEncashService: {5}, IsDefaultCurrency: {6}, IsPrepaid: {7}",
+                    this.PartyType,
+                    this.IsOurBank,
+                    this.IsResident,
+                    this.Solvency,
+                    this.IsExchange,
+                    this.IsOwnEncashService,
+                    this.IsDefaultCurrency,
+                    this.IsPrepaid.HasValue ? this.IsPrepaid.Value.ToString() : "-");
+            }
+        }
     }
 
     /// <summary>

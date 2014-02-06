@@ -1,0 +1,179 @@
+﻿<UserControl x:Class="CashDepartment.TransactionsConfig.Programm.Content.MetaDataContent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:enumTran="clr-namespace:CashDepartment.WellKnownBusinessObjects.Transactions;assembly=CashDepartment.WellKnownBusinessObjects"
+			 xmlns:enumCore="clr-namespace:CashDepartment.WellKnownBusinessObjects.Core;assembly=CashDepartment.WellKnownBusinessObjects"
+			 xmlns:enumEnq="clr-namespace:CashDepartment.WellKnownBusinessObjects.Enquiries;assembly=CashDepartment.WellKnownBusinessObjects"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:myViewModel="clr-namespace:CashDepartment.TransactionsConfig.Programm.ViewModel"
+             xmlns:myData="clr-namespace:CashDepartment.TransactionsConfig.Programm.Data"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.DataContext>
+        <myViewModel:MetaDataContentViewModel/>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+
+        <myData:myODBTypeConv x:Key="ODBTypeConv"/>
+        
+        <ObjectDataProvider x:Key="EnumTransactionEventResult" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="enumTran:TransactionEventResult"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="EnumPartyType" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="enumCore:PartyType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="EnumEnquirySolvency" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="enumEnq:EnquirySolvency"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <DataTemplate x:Key="ListViewMainDataTemplate1">
+            <Grid Margin="0,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{Binding TransactionEvent}" FontWeight="Bold" Margin="0,10,0,10"/>
+                    <!--<Label Content="{Binding ODBType,Converter={StaticResource ODBTypeConv}}" FontWeight="Bold" Margin="20,0,0,0"/>-->
+                </StackPanel>
+                <DataGrid ItemsSource="{Binding Metadata}" AutoGenerateColumns="False" RowHeaderWidth="0" HeadersVisibility="None" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" Grid.Row="1" GridLinesVisibility="All" CellStyle="{DynamicResource DataGridCellStyle1}">
+                    <DataGrid.Columns>
+                        <!--<DataGridTemplateColumn>
+                            <DataGridTemplateColumn.Header>
+                            <TextBlock Text="{Binding RelativeSource={RelativeSource Findancestor, AncestorType={x:Type DataGrid}}, Path=DataContext.TransactionEvent}"/>
+                        </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding testData}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>-->
+                        <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumTransactionEventResult}}" SelectedValueBinding="{Binding EventResult}" Width="{Binding Source={x:Reference colResult}, Path=Width, Mode=TwoWay}"/>
+                        <DataGridCheckBoxColumn Binding="{Binding ForDefaultCurrency}" Width="{Binding Source={x:Reference colDefaultCurrency}, Path=Width, Mode=TwoWay}"/>
+                        <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumPartyType}}" SelectedValueBinding="{Binding PartyType}" Width="{Binding Source={x:Reference colPartyType}, Path=Width, Mode=TwoWay}"/>
+                        <DataGridCheckBoxColumn Binding="{Binding IsOurBank}" Width="{Binding Source={x:Reference colIsOurBank}, Path=Width, Mode=TwoWay}"/>
+                        <DataGridCheckBoxColumn Binding="{Binding IsResident}" Width="{Binding Source={x:Reference colIsResident}, Path=Width, Mode=TwoWay}"/>
+                        <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumEnquirySolvency}}" SelectedValueBinding="{Binding Solvency}" Width="{Binding Source={x:Reference colSolvency}, Path=Width, Mode=TwoWay}"/>
+                        <DataGridCheckBoxColumn Binding="{Binding IsExchange}" Width="{Binding Source={x:Reference colIsExchange}, Path=Width, Mode=TwoWay}"/>
+                        <DataGridCheckBoxColumn Binding="{Binding IsDefaultCurrency}" Width="{Binding Source={x:Reference colIsDefaultCurrency}, Path=Width, Mode=TwoWay}"/>
+                        <DataGridCheckBoxColumn Binding="{Binding IsPrepaid}" Width="{Binding Source={x:Reference colIsPrepaid}, Path=Width, Mode=TwoWay}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Content="Add new row" Grid.Row="2"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Command="{Binding RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}, Path=DataContext.AddNewRowCommand}" CommandParameter="{Binding Metadata}"/>
+            </Grid>
+        </DataTemplate>
+        <Style x:Key="ListViewItemStyle1" TargetType="{x:Type ListViewItem}">
+        	<Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        	<Setter Property="Background" Value="Transparent"/>
+        	<Setter Property="BorderBrush" Value="Transparent"/>
+        	<Setter Property="BorderThickness" Value="1"/>
+        	<Setter Property="Margin" Value="0"/>
+        	<Setter Property="Foreground" Value="{DynamicResource ItemText}"/>
+        	<Setter Property="Padding" Value="5,2"/>
+        	<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        	<Setter Property="VerticalContentAlignment" Value="Center"/>
+        	<Setter Property="Template">
+        		<Setter.Value>
+        			<ControlTemplate TargetType="{x:Type ListViewItem}">
+        				<Grid Background="{TemplateBinding Background}">
+        					<Border x:Name="Selection" Visibility="Collapsed"/>
+        					<GridViewRowPresenter Columns="{TemplateBinding GridView.ColumnCollection}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Grid.RowSpan="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        					<ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Visibility="Collapsed" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        				</Grid>
+        				<ControlTemplate.Triggers>
+        					<Trigger Property="GridView.ColumnCollection" Value="{x:Null}">
+        						<Setter Property="Visibility" TargetName="contentPresenter" Value="Visible"/>
+        					</Trigger>
+        					<Trigger Property="IsMouseOver" Value="True">
+        						<Setter Property="Visibility" TargetName="Selection" Value="Visible"/>
+        						<Setter Property="Background" TargetName="Selection" Value="{DynamicResource ItemBackgroundHover}"/>
+        						<Setter Property="Foreground" Value="{DynamicResource ItemTextHover}"/>
+        					</Trigger>
+        					<Trigger Property="IsSelected" Value="True">
+        						<!--<Setter Property="Visibility" TargetName="Selection" Value="Visible"/>
+        						<Setter Property="Background" TargetName="Selection" Value="{DynamicResource ItemBackgroundSelected}"/>
+        						<Setter Property="Foreground" Value="{DynamicResource ItemTextSelected}"/>-->
+        					</Trigger>
+        					<Trigger Property="IsEnabled" Value="False">
+        						<Setter Property="Foreground" Value="{DynamicResource ItemTextDisabled}"/>
+        					</Trigger>
+        				</ControlTemplate.Triggers>
+        			</ControlTemplate>
+        		</Setter.Value>
+        	</Setter>
+        </Style>
+        <SolidColorBrush x:Key="{x:Static DataGrid.FocusBorderBrushKey}" Color="#FF000000"/>
+        <Style x:Key="DataGridCellStyle1" TargetType="{x:Type DataGridCell}">
+        	<Setter Property="Background" Value="Transparent"/>
+        	<Setter Property="BorderBrush" Value="Transparent"/>
+        	<Setter Property="BorderThickness" Value="1"/>
+        	<Setter Property="Template">
+        		<Setter.Value>
+        			<ControlTemplate TargetType="{x:Type DataGridCell}">
+        				<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+        					<ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+        				</Border>
+        			</ControlTemplate>
+        		</Setter.Value>
+        	</Setter>
+        	<Style.Triggers>
+        		<Trigger Property="IsSelected" Value="True">
+        			<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+        			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+        			<Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+        		</Trigger>
+        		<Trigger Property="IsKeyboardFocusWithin" Value="True">
+        			<Setter Property="BorderBrush" Value="{DynamicResource {x:Static DataGrid.FocusBorderBrushKey}}"/>
+        		</Trigger>
+        		<MultiTrigger>
+        			<MultiTrigger.Conditions>
+        				<Condition Property="IsSelected" Value="true"/>
+        				<Condition Property="Selector.IsSelectionActive" Value="false"/>
+        			</MultiTrigger.Conditions>
+        			<Setter Property="Background" Value="Transparent"/>
+        			<Setter Property="BorderBrush" Value="Transparent"/>
+        			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}"/>
+        		</MultiTrigger>
+        		<Trigger Property="IsEnabled" Value="false">
+        			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+        		</Trigger>
+        	</Style.Triggers>
+        </Style>        
+    </UserControl.Resources>
+
+
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left">
+    <Grid Style="{StaticResource ContentRoot}">      
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+            <DataGrid AutoGenerateColumns="False" RowHeaderWidth="0" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="5,0,0,0" GridLinesVisibility="All">
+            <DataGrid.Columns>
+                <DataGridComboBoxColumn x:Name="colResult" Header="Result" Width="100"/>
+                <DataGridCheckBoxColumn x:Name="colDefaultCurrency" Header="DefaultCurrency"/>
+                <DataGridComboBoxColumn x:Name="colPartyType" Header="PartyType" Width="100"/>
+                <DataGridCheckBoxColumn x:Name="colIsOurBank" Header="IsOurBank" />
+                <DataGridCheckBoxColumn x:Name="colIsResident" Header="IsResident" />
+                <DataGridComboBoxColumn x:Name="colSolvency" Header="Solvency" Width="100" />
+                <DataGridCheckBoxColumn x:Name="colIsExchange" Header="IsExchange" />
+                <DataGridCheckBoxColumn x:Name="colIsDefaultCurrency" Header="IsDefaultCurrency" />
+                <DataGridCheckBoxColumn x:Name="colIsPrepaid" Header="IsPrepaid" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <ListView ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataCollection}" ItemTemplate="{DynamicResource ListViewMainDataTemplate1}" ItemContainerStyle="{DynamicResource ListViewItemStyle1}"/>
+    </Grid>
+    </ScrollViewer>
+</UserControl>
