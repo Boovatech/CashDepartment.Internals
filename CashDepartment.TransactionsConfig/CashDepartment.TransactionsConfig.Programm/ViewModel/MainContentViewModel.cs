@@ -169,7 +169,7 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
             AllData.GetInstance().DataCollection.Add(tmg);
 
             ////временное решение
-            //var frame = VisualHelper.FindChild<ModernFrame>(App.Current.Windows[0], "ContentFrame");            
+            //var frame = VisualHelper.FindChild<ModernFrame>(App.Current.Windows[0], "myContentFrame");            
             //System.Windows.Input.NavigationCommands.Refresh.Execute(null, frame);  
             var tmp = this.FrameSource;
             this.FrameSource = null;

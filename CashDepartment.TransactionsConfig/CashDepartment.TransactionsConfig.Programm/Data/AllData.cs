@@ -20,19 +20,16 @@ namespace CashDepartment.TransactionsConfig.Shell.Data
         {
             this.dataLocker = new object();
             this.DataCollection = new ObservableCollection<TransactionMetadataGroup>();
-            ////this.LoadData();
-//#if DEBUG
-//            this.InitData();
-//#endif
         }
 
         public void LoadData(string path)
         {
             try
             {
+                //System.Threading.Thread.Sleep(5000);
                 this.ClearData();
                 if (File.Exists(path))
-                {                    
+                {
                     XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<TransactionMetadataGroup>));
                     using (StreamReader sr = new StreamReader(path))
                     {
@@ -40,7 +37,7 @@ namespace CashDepartment.TransactionsConfig.Shell.Data
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 #if DEBUG
                 System.Windows.MessageBox.Show("Ex -> LoadData: " + ex.Message);
