@@ -7,7 +7,10 @@
         ContentSource="/Pages/Home.xaml" Width="1387" WindowStartupLocation="CenterScreen" Height="783">
 
     <mui:ModernWindow.MenuLinkGroups>
-        <mui:LinkGroup GroupName="MetaDataGroup">            
+        <mui:LinkGroup GroupName="MetaDataGroup">
+            <mui:LinkGroup.Links>
+                <mui:Link Source="/Pages/Home.xaml" />
+            </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="settings" GroupName="settings">
             <mui:LinkGroup.Links>
