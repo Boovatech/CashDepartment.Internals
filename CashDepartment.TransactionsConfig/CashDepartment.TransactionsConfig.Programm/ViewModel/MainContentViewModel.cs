@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Xml.Serialization;
 
@@ -51,6 +52,7 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
         public List<string> TransactionExportODBTypeList { get; set; }
         public string TransactionEventsSelectedItem { get; set; }
         public string TransactionExportODBTypeSelectedItem { get; set; }
+
         #endregion
 
         #region Constructors
@@ -62,8 +64,8 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
             this.isFirstNavigate = true;
             this.GoToParamsOrMetaDataCommand = new RelayCommand(arg => this.GoToParamsOrMetaData(arg));
             this.MySaveCommand = new RelayCommand(arg => this.Save());
-            this.AddNewTransactionEventCommand = new RelayCommand(arg => this.AddNewTransactionEven());
-        }
+            this.AddNewTransactionEventCommand = new RelayCommand(arg => this.AddNewTransactionEven());           
+        }       
       
         #endregion
 
@@ -144,26 +146,32 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
 
             var metaDataList = new Shared.ComponentModel.BindingListEx<TransactionMetadata>();
 
+            TransactionMetadata meta = new DefaultTransactionMetadata();
+
             switch (this.currentBusinessProcessSourceType)
             {
                 case BusinessProcessSourceType.Atm:
+                    meta = new AtmInCashTransactionMetadata();
                     break;
                 case BusinessProcessSourceType.CashCenter:
                     break;
                 case BusinessProcessSourceType.Client:
                     break;
                 case BusinessProcessSourceType.Interbank:
-                    var meta = new InterbankEncashTransactionMetadata();
-                    meta.Params = new Shared.ComponentModel.BindingListEx<TransactionMetadataParams>();
-                    metaDataList.Add(meta);
+                    meta = new InterbankEncashTransactionMetadata();
+                    
                     break;
                 case BusinessProcessSourceType.Terminal:
                     break;
                 case BusinessProcessSourceType.Unit:
                     break;
                 case BusinessProcessSourceType.None:
+                    meta = new DefaultTransactionMetadata();
                     break;
             }
+
+            meta.Params = new Shared.ComponentModel.BindingListEx<TransactionMetadataParams>();
+            metaDataList.Add(meta);         
 
             tmg.Metadata = metaDataList;
             AllData.GetInstance().DataCollection.Add(tmg);
@@ -184,24 +192,25 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
                 this.currentBusinessProcessSourceType = (BusinessProcessSourceType)Enum.Parse(typeof(BusinessProcessSourceType), currentBusinessProcessSourceType);
                 //this.isFirstNavigate = false;
                 this.FrameSource = null;
-                switch (this.currentBusinessProcessSourceType)
-                {
-                    case BusinessProcessSourceType.Atm:
-                        break;
-                    case BusinessProcessSourceType.CashCenter:
-                        break;
-                    case BusinessProcessSourceType.Client:
-                        break;
-                    case BusinessProcessSourceType.Interbank:
-                        this.FrameSource = new Uri(string.Format("/Content/MetaDataContent.xaml#{0}", this.currentBusinessProcessSourceType), UriKind.Relative);
-                        break;
-                    case BusinessProcessSourceType.Terminal:
-                        break;
-                    case BusinessProcessSourceType.Unit:
-                        break;
-                    case BusinessProcessSourceType.None:
-                        break;
-                }
+                this.FrameSource = new Uri(string.Format("/Content/MetaDataContent.xaml#{0}", this.currentBusinessProcessSourceType), UriKind.Relative);                
+                ////switch (this.currentBusinessProcessSourceType)
+                ////{
+                ////    case BusinessProcessSourceType.Atm:
+                ////        break;
+                ////    case BusinessProcessSourceType.CashCenter:
+                ////        break;
+                ////    case BusinessProcessSourceType.Client:
+                ////        break;
+                ////    case BusinessProcessSourceType.Interbank:
+                ////        this.FrameSource = new Uri(string.Format("/Content/MetaDataContent.xaml#{0}", this.currentBusinessProcessSourceType), UriKind.Relative);
+                ////        break;
+                ////    case BusinessProcessSourceType.Terminal:
+                ////        break;
+                ////    case BusinessProcessSourceType.Unit:
+                ////        break;
+                ////    case BusinessProcessSourceType.None:
+                ////        break;
+                ////}
             //}
 
         }        

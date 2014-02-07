@@ -7,6 +7,8 @@
              xmlns:enumTran="clr-namespace:CashDepartment.WellKnownBusinessObjects.Transactions;assembly=CashDepartment.WellKnownBusinessObjects"
 			 xmlns:enumCore="clr-namespace:CashDepartment.WellKnownBusinessObjects.Core;assembly=CashDepartment.WellKnownBusinessObjects"
 			 xmlns:enumEnq="clr-namespace:CashDepartment.WellKnownBusinessObjects.Enquiries;assembly=CashDepartment.WellKnownBusinessObjects"
+             xmlns:enumObj="clr-namespace:CashDepartment.WellKnownBusinessObjects;assembly=CashDepartment.WellKnownBusinessObjects"
+             xmlns:enumEncash="clr-namespace:CashDepartment.WellKnownBusinessObjects.Encashment;assembly=CashDepartment.WellKnownBusinessObjects"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:myViewModel="clr-namespace:CashDepartment.TransactionsConfig.Shell.ViewModel"
              xmlns:myData="clr-namespace:CashDepartment.TransactionsConfig.Shell.Data"
@@ -17,12 +19,9 @@
         <myViewModel:MetaDataContentViewModel/>
     </UserControl.DataContext>
 
-    <UserControl.Resources>
-
+    <UserControl.Resources>        
 
         <myData:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
-
-        <myData:myODBTypeConv x:Key="ODBTypeConv"/>
 
         <ObjectDataProvider x:Key="EnumTransactionEventResult" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
             <ObjectDataProvider.MethodParameters>
@@ -39,8 +38,18 @@
                 <x:Type TypeName="enumEnq:EnquirySolvency"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
+        <ObjectDataProvider x:Key="EnumOperatingTime" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enumObj:OperatingTime"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="EnumReturnType" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enumEncash:EncashmentReturnType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
 
-        <DataTemplate x:Key="ListViewMainDataTemplate1">
+        <DataTemplate x:Key="ListViewMainDataTemplateInterbank">
             <Grid Margin="0,0,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -51,7 +60,7 @@
                     <Label Content="{Binding TransactionEvent}" FontWeight="Bold" Margin="0,10,0,10"/>
                     <Label Content="{Binding ODBType}" FontWeight="Bold" Margin="50,10,0,10"/>
                 </StackPanel>
-                <DataGrid ItemsSource="{Binding Metadata}" SelectionMode="Single" AutoGenerateColumns="False" RowHeaderWidth="0" HeadersVisibility="None" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="True" Grid.Row="1" GridLinesVisibility="All" CellStyle="{DynamicResource DataGridCellStyle1}">
+                <DataGrid x:Name="dataInclude" ItemsSource="{Binding Metadata}"  SelectionMode="Single" AutoGenerateColumns="False" RowHeaderWidth="0" HeadersVisibility="None" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="True" Grid.Row="1" GridLinesVisibility="All" CellStyle="{DynamicResource DataGridCellStyle1}">
                     <DataGrid.Columns>
                         <!--<DataGridTemplateColumn>
                             <DataGridTemplateColumn.Header>
@@ -63,38 +72,84 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>-->
-                        <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumTransactionEventResult}}" SelectedValueBinding="{Binding EventResult}" Width="{Binding Width, Mode=TwoWay, Source={x:Reference colResult}}" >
+                        <DataGridComboBoxColumn Header="Result" ItemsSource="{Binding Source={StaticResource EnumTransactionEventResult}}" SelectedValueBinding="{Binding EventResult}" >
                             <DataGridComboBoxColumn.EditingElementStyle>
                                 <Style TargetType="{x:Type ComboBox}">
                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                 </Style>
                             </DataGridComboBoxColumn.EditingElementStyle>
                         </DataGridComboBoxColumn>
-                        <DataGridCheckBoxColumn Binding="{Binding ForDefaultCurrency}" Width="{Binding Width, Mode=TwoWay, Source={x:Reference colDefaultCurrency}}"/>
-                        <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumPartyType}}" SelectedValueBinding="{Binding PartyType}" Width="{Binding Width, Mode=TwoWay, Source={x:Reference colPartyType}}">
+                        <DataGridCheckBoxColumn Header="DefaultCurrency" Binding="{Binding ForDefaultCurrency}" />
+                        <DataGridComboBoxColumn Header="PartyType" ItemsSource="{Binding Source={StaticResource EnumPartyType}}" SelectedValueBinding="{Binding PartyType}" >
                             <DataGridComboBoxColumn.EditingElementStyle>
                                 <Style TargetType="{x:Type ComboBox}">
                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                 </Style>
                             </DataGridComboBoxColumn.EditingElementStyle>
                         </DataGridComboBoxColumn>
-                        <DataGridCheckBoxColumn Binding="{Binding IsOurBank}" Width="{Binding Width, Mode=TwoWay, Source={x:Reference colIsOurBank}}"/>
-                        <DataGridCheckBoxColumn Binding="{Binding IsResident}" Width="{Binding Width, Mode=TwoWay, Source={x:Reference colIsResident}}"/>
-                        <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumEnquirySolvency}}" SelectedValueBinding="{Binding Solvency}" Width="{Binding Width, Mode=TwoWay, Source={x:Reference colSolvency}}">
+                        <DataGridCheckBoxColumn Header="IsOurBank" Binding="{Binding IsOurBank}" />
+                        <DataGridCheckBoxColumn Header="IsResident" Binding="{Binding IsResident}" />
+                        <DataGridComboBoxColumn Header="Solvency" ItemsSource="{Binding Source={StaticResource EnumEnquirySolvency}}" SelectedValueBinding="{Binding Solvency}" >
                             <DataGridComboBoxColumn.EditingElementStyle>
                                 <Style TargetType="{x:Type ComboBox}">
                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                 </Style>
                             </DataGridComboBoxColumn.EditingElementStyle>
                         </DataGridComboBoxColumn>
-                        <DataGridCheckBoxColumn Binding="{Binding IsExchange}" Width="{Binding Width, Mode=TwoWay, Source={x:Reference colIsExchange}}"/>
-                        <DataGridCheckBoxColumn Binding="{Binding IsDefaultCurrency}" Width="{Binding Width, Mode=TwoWay, Source={x:Reference colIsDefaultCurrency}}"/>
-                        <DataGridCheckBoxColumn Binding="{Binding IsPrepaid}" Width="{Binding Width, Mode=TwoWay, Source={x:Reference colIsPrepaid}}"/>
+                        <DataGridCheckBoxColumn Header="IsExchange" Binding="{Binding IsExchange}" />
+                        <DataGridCheckBoxColumn Header="IsDefaultCurrency"  Binding="{Binding IsDefaultCurrency}" />
+                        <DataGridCheckBoxColumn Header="IsPrepaid" Binding="{Binding IsPrepaid}" />
                     </DataGrid.Columns>
                 </DataGrid>
                 <mui:ModernButton IconData="F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z " Grid.Row="2"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Command="{Binding DataContext.AddNewRowCommand, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Metadata}"/>
             </Grid>
         </DataTemplate>
+
+        <DataTemplate x:Key="ListViewMainDataTemplateAtm">
+            <Grid Margin="0,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{Binding TransactionEvent}" FontWeight="Bold" Margin="0,10,0,10"/>
+                    <Label Content="{Binding ODBType}" FontWeight="Bold" Margin="50,10,0,10"/>
+                </StackPanel>
+                <DataGrid x:Name="dataInclude" ItemsSource="{Binding Metadata}" SelectionMode="Single" AutoGenerateColumns="False" RowHeaderWidth="0" HeadersVisibility="None" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="True" Grid.Row="1" GridLinesVisibility="All" CellStyle="{DynamicResource DataGridCellStyle1}">
+                    <DataGrid.Columns>
+                        <DataGridComboBoxColumn Header="Result" ItemsSource="{Binding Source={StaticResource EnumTransactionEventResult}}" SelectedValueBinding="{Binding EventResult}"  >
+                            <DataGridComboBoxColumn.EditingElementStyle>
+                                <Style TargetType="{x:Type ComboBox}">
+                                    <Setter Property="IsDropDownOpen" Value="True"></Setter>
+                                </Style>
+                            </DataGridComboBoxColumn.EditingElementStyle>
+                        </DataGridComboBoxColumn>
+                        <DataGridCheckBoxColumn Header="DefaultCurrency" Binding="{Binding ForDefaultCurrency}" />
+                        <DataGridComboBoxColumn Header="CreationTime" ItemsSource="{Binding Source={StaticResource EnumOperatingTime}}" SelectedValueBinding="{Binding RelativeSource={RelativeSource Findancestor, AncestorType={x:Type DataGrid}}, Path=DataContext.OperatingTime}" MinWidth="100">
+                            <DataGridComboBoxColumn.EditingElementStyle>
+                                <Style TargetType="{x:Type ComboBox}">
+                                    <Setter Property="IsDropDownOpen" Value="True"></Setter>
+                                </Style>
+                            </DataGridComboBoxColumn.EditingElementStyle>
+                        </DataGridComboBoxColumn>
+                        <DataGridCheckBoxColumn Header="isReserve" Binding="{Binding IsReserve}" MinWidth="100"/>
+                        <DataGridCheckBoxColumn Header="isOutCases" Binding="{Binding IsOutOfCases}" MinWidth="100"/>
+                        <DataGridCheckBoxColumn Header="withoutDoc" Binding="{Binding WithoutDocument}" MinWidth="100"/>
+                        <DataGridCheckBoxColumn Header="isReturn" Binding="{Binding IsReturn}" MinWidth="100"/>
+                        <DataGridComboBoxColumn Header="ReturnType" ItemsSource="{Binding Source={StaticResource EnumReturnType}}" SelectedValueBinding="{Binding ReturnType}" MinWidth="100">
+                            <DataGridComboBoxColumn.EditingElementStyle>
+                                <Style TargetType="{x:Type ComboBox}">
+                                    <Setter Property="IsDropDownOpen" Value="True"></Setter>
+                                </Style>
+                            </DataGridComboBoxColumn.EditingElementStyle>
+                        </DataGridComboBoxColumn>                        
+                    </DataGrid.Columns>
+                </DataGrid>
+                <mui:ModernButton IconData="F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z " Grid.Row="2"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Command="{Binding DataContext.AddNewRowCommand, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Metadata}"/>
+            </Grid>
+        </DataTemplate>
+
         <Style x:Key="ListViewItemStyle1" TargetType="{x:Type ListViewItem}">
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Background" Value="Transparent"/>
@@ -172,29 +227,69 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <myData:ListViewMetaDataTemplateSelector x:Key="MyDataSelector"/>
+        
+        <DataTemplate x:Key="interbankTemplate">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <Grid Style="{StaticResource ContentRoot}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--<ContentControl Content="{Binding DataGridContent,UpdateSourceTrigger=PropertyChanged}"/>-->
+                    <DataGrid x:Name="dgMain" Loaded="dgMain_Loaded"  AutoGenerateColumns="False" RowHeaderWidth="0" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="5,0,0,0" GridLinesVisibility="All" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}">
+                        <DataGrid.Columns>
+                            <DataGridComboBoxColumn x:Name="colResult" Header="Result"/>
+                            <DataGridCheckBoxColumn x:Name="colDefaultCurrency" Header="DefaultCurrency"  />
+                            <DataGridComboBoxColumn x:Name="colPartyType" Header="PartyType" />
+                            <DataGridCheckBoxColumn x:Name="colIsOurBank" Header="IsOurBank"  />
+                            <DataGridCheckBoxColumn x:Name="colIsResident" Header="IsResident"  />
+                            <DataGridComboBoxColumn x:Name="colSolvency" Header="Solvency"  />
+                            <DataGridCheckBoxColumn x:Name="colIsExchange" Header="IsExchange" />
+                            <DataGridCheckBoxColumn x:Name="colIsDefaultCurrency" Header="IsDefaultCurrency"  />
+                            <DataGridCheckBoxColumn x:Name="colIsPrepaid" Header="IsPrepaid"  />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <ListBox x:Name="lbMain" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataContext.DataCollection, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}}" ItemTemplateSelector="{StaticResource MyDataSelector}"/>
+                    <!--<ListView ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataCollection}" ItemTemplate="{DynamicResource ListViewMainDataTemplate1}" ItemContainerStyle="{DynamicResource ListViewItemStyle1}"/>-->
+                </Grid>
+            </ScrollViewer>
+        </DataTemplate>
+
+        <DataTemplate x:Key="atmTemplate">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <Grid Style="{StaticResource ContentRoot}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--<ContentControl Content="{Binding DataGridContent,UpdateSourceTrigger=PropertyChanged}"/>-->
+                    <DataGrid x:Name="dgMain" Loaded="dgMain_Loaded" AutoGenerateColumns="False" RowHeaderWidth="0" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="5,0,0,0" GridLinesVisibility="All" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}">
+                        <DataGrid.Columns>
+                            <DataGridComboBoxColumn x:Name="colResult" Header="Result"/>
+                            <DataGridCheckBoxColumn x:Name="colDefaultCurrency" Header="DefaultCurrency"  />
+                            <DataGridComboBoxColumn x:Name="colPartyType" Header="CreationTime" />
+                            <DataGridCheckBoxColumn x:Name="colIsOurBank" Header="isReserve"  />
+                            <DataGridCheckBoxColumn x:Name="colIsResident" Header="isOutCases"  />
+                            <DataGridComboBoxColumn x:Name="colSolvency" Header="withoutDoc"  />
+                            <DataGridCheckBoxColumn x:Name="colIsExchange" Header="isReturn" />
+                            <DataGridCheckBoxColumn x:Name="colIsDefaultCurrency" Header="ReturnType"  />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <ListBox x:Name="lbMain" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataContext.DataCollection, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}}" ItemTemplateSelector="{StaticResource MyDataSelector}"/>
+                    <!--<ListView ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataCollection}" ItemTemplate="{DynamicResource ListViewMainDataTemplate1}" ItemContainerStyle="{DynamicResource ListViewItemStyle1}"/>-->
+                </Grid>
+            </ScrollViewer>
+        </DataTemplate>
+
+
+        <myData:ContentTemplateSelector x:Key="MyContentSelector"/>
+
     </UserControl.Resources>
 
 
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Left">
-        <Grid Style="{StaticResource ContentRoot}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <DataGrid AutoGenerateColumns="False" RowHeaderWidth="0" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="5,0,0,0" GridLinesVisibility="All" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}">
-                <DataGrid.Columns>
-                    <DataGridComboBoxColumn x:Name="colResult" Header="Result"/>
-                    <DataGridCheckBoxColumn x:Name="colDefaultCurrency" Header="DefaultCurrency"  />
-                    <DataGridComboBoxColumn x:Name="colPartyType" Header="PartyType" />
-                    <DataGridCheckBoxColumn x:Name="colIsOurBank" Header="IsOurBank"  />
-                    <DataGridCheckBoxColumn x:Name="colIsResident" Header="IsResident"  />
-                    <DataGridComboBoxColumn x:Name="colSolvency" Header="Solvency"  />
-                    <DataGridCheckBoxColumn x:Name="colIsExchange" Header="IsExchange" />
-                    <DataGridCheckBoxColumn x:Name="colIsDefaultCurrency" Header="IsDefaultCurrency"  />
-                    <DataGridCheckBoxColumn x:Name="colIsPrepaid" Header="IsPrepaid"  />
-                </DataGrid.Columns>
-            </DataGrid>
-            <ListView ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataCollection}" ItemTemplate="{DynamicResource ListViewMainDataTemplate1}" ItemContainerStyle="{DynamicResource ListViewItemStyle1}"/>
-        </Grid>
-    </ScrollViewer>
+    <ContentControl Content="{Binding CurrentBusinessProcessSourceType,UpdateSourceTrigger=PropertyChanged}" ContentTemplateSelector="{StaticResource MyContentSelector}"/>
+    
+    
 </UserControl>

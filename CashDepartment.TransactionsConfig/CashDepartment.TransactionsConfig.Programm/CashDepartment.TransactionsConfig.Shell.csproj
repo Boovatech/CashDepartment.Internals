@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -74,10 +74,9 @@
       <DependentUpon>Params.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\AllData.cs" />
+    <Compile Include="Data\ContentTemplateSelector.cs" />
     <Compile Include="Data\IntToVisibilityConverter.cs" />
-    <Compile Include="Data\myODBTypeConv.cs" />
-    <Compile Include="Data\myTransactionEventTypeConv.cs" />
-    <Compile Include="Data\NullToStringConverter.cs" />
+    <Compile Include="Data\ListViewMetaDataTemplateSelector.cs" />
     <Compile Include="Data\VisualHelper.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />

@@ -37,6 +37,10 @@
 
                 for (int i = 0; i < menuData.Count;i++ )
                 {
+                    if(menuData[i].Key.ToString() == "None")
+                    {
+                        continue;
+                    }
                     var link = new Link();
                     link.DisplayName = menuData[i].Value;
                     link.Source = new Uri(string.Format("/Content/MainContent.xaml#{0}", menuData[i].Key), UriKind.Relative);
