@@ -1,5 +1,6 @@
 ﻿namespace CashDepartment.TransactionsConfig.Shell.ViewModel
 {
+    using CashDepartment.Shared.Utils;
     using CashDepartment.TransactionsConfig.Data;
     using CashDepartment.WellKnownBusinessObjects;
     using FirstFloor.ModernUI.Presentation;
@@ -32,13 +33,14 @@
 
             if(menuCollection != null)
             {
-                foreach (var s in Enum.GetNames(typeof(BusinessProcessSourceType)))
+                var menuData = EnumHelper.GetLocalizedValuesList(typeof(BusinessProcessSourceType));
+
+                for (int i = 0; i < menuData.Count;i++ )
                 {
-                    if (s == "None") continue;
                     var link = new Link();
-                    link.DisplayName = s;
-                    link.Source = new Uri(string.Format("/Content/MainContent.xaml#{0}", s), UriKind.Relative);
-                    menuCollection.Links.Add(link);                    
+                    link.DisplayName = menuData[i].Value;
+                    link.Source = new Uri(string.Format("/Content/MainContent.xaml#{0}", menuData[i].Key), UriKind.Relative);
+                    menuCollection.Links.Add(link);
                 }
             }           
         }

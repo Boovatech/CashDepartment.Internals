@@ -5,6 +5,7 @@
     using FirstFloor.ModernUI.Windows.Controls;
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -24,10 +25,9 @@
     public partial class MainWindow : ModernWindow
     {
         public MainWindow()
-        {
+        {                   
             InitializeComponent();
-
-            WellKnownBusinessObjects.PersonalizableEnumConverterBase.Init();
+           
             this.DataContext = new MainWindowViewModel(this.MenuLinkGroups);
         }
     }

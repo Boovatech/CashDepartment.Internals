@@ -64,7 +64,10 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Content="{Binding TransactionEvent}" FontWeight="Bold" Margin="0,10,0,0"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{Binding TransactionEvent}" FontWeight="Bold" Margin="0,10,0,10"/>
+                    <Label Content="{Binding ODBType}" FontWeight="Bold" Margin="50,10,0,10"/>
+                </StackPanel>
                 <DataGrid ItemsSource="{Binding Metadata}" AutoGenerateColumns="False" RowHeaderWidth="0" HeadersVisibility="None" Grid.Row="1" GridLinesVisibility="None" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" CellStyle="{DynamicResource DataGridCellStyle2}">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>       
