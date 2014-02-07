@@ -19,7 +19,7 @@
         <myViewModel:MetaDataContentViewModel/>
     </UserControl.DataContext>
 
-    <UserControl.Resources>        
+    <UserControl.Resources>
 
         <myData:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
 
@@ -124,10 +124,10 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Padding="10,2,0,2" Grid.ColumnSpan="2">
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="{Binding TransactionEvent}" FontWeight="Bold" Margin="0,10,0,10"/>
-                    <Label Content="{Binding ODBType}" FontWeight="Bold" Margin="50,10,0,10"/>
-                </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding TransactionEvent}" FontWeight="Bold" Margin="0,10,0,10"/>
+                        <Label Content="{Binding ODBType}" FontWeight="Bold" Margin="50,10,0,10"/>
+                    </StackPanel>
                 </Border>
                 <Border BorderThickness="1,0,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" HorizontalAlignment="Left"/>
                 <DataGrid x:Name="dataInclude" ItemsSource="{Binding Metadata}" Grid.Column="1" SelectionMode="Single" AutoGenerateColumns="False" RowHeaderWidth="0" HeadersVisibility="None" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="True" Grid.Row="1" GridLinesVisibility="All" CellStyle="{DynamicResource DataGridCellStyle1}">
@@ -157,7 +157,7 @@
                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                 </Style>
                             </DataGridComboBoxColumn.EditingElementStyle>
-                        </DataGridComboBoxColumn>                        
+                        </DataGridComboBoxColumn>
                     </DataGrid.Columns>
                 </DataGrid>
                 <mui:ModernButton Grid.ColumnSpan="2" IconData="F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z " Grid.Row="2"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Command="{Binding DataContext.AddNewRowCommand, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Metadata}"/>
@@ -244,6 +244,39 @@
 
         <myData:ListViewMetaDataTemplateSelector x:Key="MyDataSelector"/>
         
+        <Style x:Key="LBICS1" TargetType="ListBoxItem">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+                <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+                <Setter Property="Padding" Value="2,0,0,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <!--<Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>-->
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="true"/>
+                                    <Condition Property="Selector.IsSelectionActive" Value="false"/>
+                                </MultiTrigger.Conditions>
+                                <!--<Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>-->
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <DataTemplate x:Key="interbankTemplate">
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                 <Grid Style="{StaticResource ContentRoot}">
@@ -252,7 +285,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <!--<ContentControl Content="{Binding DataGridContent,UpdateSourceTrigger=PropertyChanged}"/>-->
-                    <DataGrid x:Name="dgMain" Loaded="dgMain_Loaded"  AutoGenerateColumns="False" RowHeaderWidth="0" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="2,0,0,0" GridLinesVisibility="All" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}" HorizontalAlignment="Left"> 
+                    <DataGrid x:Name="dgMain" Loaded="dgMain_Loaded"  AutoGenerateColumns="False" RowHeaderWidth="0" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="3,0,0,0" GridLinesVisibility="All" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}" HorizontalAlignment="Left">
                         <DataGrid.Columns>
                             <DataGridComboBoxColumn x:Name="colResult" Header="Result"/>
                             <DataGridCheckBoxColumn x:Name="colDefaultCurrency" Header="DefaultCurrency"  />
@@ -272,7 +305,7 @@
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                     </DataGrid>
-                    <ListBox x:Name="lbMain" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataContext.DataCollection, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}}" ItemTemplateSelector="{StaticResource MyDataSelector}"/>
+                    <ListBox x:Name="lbMain" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataContext.DataCollection, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}}" ItemTemplateSelector="{StaticResource MyDataSelector}" ItemContainerStyle="{DynamicResource LBICS1}"/>
                     <!--<ListView ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataCollection}" ItemTemplate="{DynamicResource ListViewMainDataTemplate1}" ItemContainerStyle="{DynamicResource ListViewItemStyle1}"/>-->
                 </Grid>
             </ScrollViewer>
@@ -286,8 +319,8 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <!--<ContentControl Content="{Binding DataGridContent,UpdateSourceTrigger=PropertyChanged}"/>-->
-                    <DataGrid x:Name="dgMain" Loaded="dgMain_Loaded" AutoGenerateColumns="False" RowHeaderWidth="0" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="2,0,0,0" GridLinesVisibility="All" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}" HorizontalAlignment="Left">
-                        <DataGrid.Columns>                            
+                    <DataGrid x:Name="dgMain" Loaded="dgMain_Loaded" AutoGenerateColumns="False" RowHeaderWidth="0" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="3,0,0,0" GridLinesVisibility="All" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}" HorizontalAlignment="Left">
+                        <DataGrid.Columns>
                             <DataGridComboBoxColumn x:Name="colResult" Header="Result"/>
                             <DataGridCheckBoxColumn x:Name="colDefaultCurrency" Header="DefaultCurrency"  />
                             <DataGridComboBoxColumn x:Name="colPartyType" Header="CreationTime" />
@@ -305,19 +338,18 @@
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                     </DataGrid>
-                    <ListBox x:Name="lbMain" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataContext.DataCollection, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}}" ItemTemplateSelector="{StaticResource MyDataSelector}"/>
+                    <ListBox x:Name="lbMain" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataContext.DataCollection, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}}" ItemTemplateSelector="{StaticResource MyDataSelector}" ItemContainerStyle="{DynamicResource LBICS1}"/>
                     <!--<ListView ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataCollection}" ItemTemplate="{DynamicResource ListViewMainDataTemplate1}" ItemContainerStyle="{DynamicResource ListViewItemStyle1}"/>-->
                 </Grid>
             </ScrollViewer>
         </DataTemplate>
 
-
-        <myData:ContentTemplateSelector x:Key="MyContentSelector"/>
+        <myData:ContentTemplateSelector x:Key="MyContentSelector"/>       
 
     </UserControl.Resources>
 
 
-    <ContentControl Content="{Binding CurrentBusinessProcessSourceType,UpdateSourceTrigger=PropertyChanged}" ContentTemplateSelector="{StaticResource MyContentSelector}"/>
-    
-    
+    <ContentControl Content="{Binding CurrentBusinessProcessSourceType,UpdateSourceTrigger=PropertyChanged}" ContentTemplateSelector="{StaticResource MyContentSelector}"/>    
+
+
 </UserControl>

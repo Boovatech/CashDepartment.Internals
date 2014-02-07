@@ -27,7 +27,7 @@ namespace CashDepartment.TransactionsConfig.Shell.Data
                         return element.FindResource("interbankTemplate") as DataTemplate;                       
                 }                
             }
-            return null;
+            return null; 
         }
     }
 }

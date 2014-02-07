@@ -60,18 +60,20 @@ namespace CashDepartment.TransactionsConfig.Shell.Content
             {
                 DependencyObject obj = lb.ItemContainerGenerator.ContainerFromItem(item);
                 var dataG = VisualHelper.FindChild<DataGrid>(obj, "dataInclude");
-                foreach (var colD in dataG.Columns)
-                {                    
-                    var col = dg.Columns.First(x => x.Header.ToString() == colD.Header.ToString());
-                    if(col != null)
+                if (dataG != null)
+                {
+                    foreach (var colD in dataG.Columns)
                     {
-                        Binding myBinding = new Binding("Width");
-                        myBinding.Mode = BindingMode.TwoWay;
-                        myBinding.Source = col;
-                        BindingOperations.SetBinding(colD, DataGridColumn.WidthProperty, myBinding);                       
+                        var col = dg.Columns.First(x => x.Header.ToString() == colD.Header.ToString());
+                        if (col != null)
+                        {
+                            Binding myBinding = new Binding("Width");
+                            myBinding.Mode = BindingMode.TwoWay;
+                            myBinding.Source = col;
+                            BindingOperations.SetBinding(colD, DataGridColumn.WidthProperty, myBinding);
+                        }
                     }
                 }
-                dataG = null;
             }
         }
 
