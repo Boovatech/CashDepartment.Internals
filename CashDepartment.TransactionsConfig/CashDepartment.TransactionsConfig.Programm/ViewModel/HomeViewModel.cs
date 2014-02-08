@@ -39,14 +39,14 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
         private async void FileOpen()
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Файл проводки (*.provodka)|*.provodka";
+            ofd.Filter = "Файл проводки (*.trs)|*.trs";
 
             if (ofd.ShowDialog().Value)
             {
                 this.ProgressRingIsActive = true;
                 await Task.Factory.StartNew(() =>
                     {
-                        AllData.GetInstance().LoadData(ofd.FileName);
+                        TransactionDataContext.GetInstance().LoadData(ofd.FileName);
                         this.ProgressRingIsActive = false;
                         //временное решение
                         App.Current.Dispatcher.BeginInvoke((Action)(() =>

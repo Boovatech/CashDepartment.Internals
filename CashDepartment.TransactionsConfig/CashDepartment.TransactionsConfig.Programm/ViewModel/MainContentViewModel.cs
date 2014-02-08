@@ -102,7 +102,7 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
             try
             {
                 SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Filter = "Файл проводки (*.provodka)|*.provodka";
+                sfd.Filter = "Файл проводки (*.trs)|*.trs";
 
                 if (sfd.ShowDialog().Value)
                 {
@@ -110,10 +110,10 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
                     {
                         File.Create(sfd.FileName).Close();
                     }
-                    XmlSerializer xml = new XmlSerializer(CashDepartment.TransactionsConfig.Shell.Data.AllData.GetInstance().DataCollection.GetType());
+                    XmlSerializer xml = new XmlSerializer(CashDepartment.TransactionsConfig.Shell.Data.TransactionDataContext.GetInstance().DataCollection.GetType());
                     using (StreamWriter wr = new StreamWriter(sfd.FileName))
                     {
-                        xml.Serialize(wr, CashDepartment.TransactionsConfig.Shell.Data.AllData.GetInstance().DataCollection);
+                        xml.Serialize(wr, CashDepartment.TransactionsConfig.Shell.Data.TransactionDataContext.GetInstance().DataCollection);
                     }
                 }              
             }
@@ -173,7 +173,7 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
 
             tmg.Metadata = metaDataList;
 
-            AllData.GetInstance().AddToDataCollection(tmg);           
+            TransactionDataContext.GetInstance().AddToDataCollection(tmg);           
         }
 
 

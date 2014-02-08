@@ -48,39 +48,12 @@ namespace CashDepartment.TransactionsConfig.Shell.Content
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
 
-        }
-
-        private void ColBinding()
-        {
-            var lb = VisualHelper.FindChild<ListBox>(this, "lbMain");
-            var dg = VisualHelper.FindChild<DataGrid>(this, "dgMain");
-            var items = lb.Items;
-
-            foreach (var item in items)
-            {
-                DependencyObject obj = lb.ItemContainerGenerator.ContainerFromItem(item);
-                var dataG = VisualHelper.FindChild<DataGrid>(obj, "dataInclude");
-                if (dataG != null)
-                {
-                    foreach (var colD in dataG.Columns)
-                    {
-                        var col = dg.Columns.First(x => x.Header.ToString() == colD.Header.ToString());
-                        if (col != null)
-                        {
-                            Binding myBinding = new Binding("Width");
-                            myBinding.Mode = BindingMode.TwoWay;
-                            myBinding.Source = col;
-                            BindingOperations.SetBinding(colD, DataGridColumn.WidthProperty, myBinding);
-                        }
-                    }
-                }
-            }
-        }
+        }        
 
         private void dgMain_Loaded(object sender, RoutedEventArgs e)
         {
-            this.ColBinding();
-        }       
+            DataGridColumnBinding.GetInstance().BindingRun();
+        }  
 
     }
 }

@@ -59,7 +59,7 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
         {           
             this.AddNewRowCommand = new RelayCommand(arg => this.AddNewRow(arg));
             this.collectionViewSource = new CollectionViewSource();
-            this.collectionViewSource.Source = AllData.GetInstance().DataCollection;
+            this.collectionViewSource.Source = TransactionDataContext.GetInstance().DataCollection;
             this.collectionViewSource.Filter += collectionViewSource_Filter;
         }       
 
@@ -81,31 +81,10 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
         public void AddNewRow(object arg)
         {
             var dataList = arg as BindingListEx<TransactionMetadata>;
-            TransactionMetadata meta = new DefaultTransactionMetadata();
-
-            switch (this.CurrentBusinessProcessSourceType)
-            {
-                case BusinessProcessSourceType.Atm:
-                    meta = new AtmInCashTransactionMetadata();   
-                    break;
-                case BusinessProcessSourceType.CashCenter:                
-                    break;
-                case BusinessProcessSourceType.Client:                   
-                    break;
-                case BusinessProcessSourceType.Interbank:
-                    meta = new InterbankEncashTransactionMetadata();                    
-                    break;
-                case BusinessProcessSourceType.Terminal:                    
-                    break;
-                case BusinessProcessSourceType.Unit:                    
-                    break;
-                case BusinessProcessSourceType.None:
-                    meta = new DefaultTransactionMetadata();   
-                    break;
-            }
-
-            meta.Params = new BindingListEx<TransactionMetadataParams>();
-            dataList.Add(meta);
+            Type type = dataList[0].GetType();
+            var trans = Activator.CreateInstance(type) as TransactionMetadata;
+            trans.Params = new BindingListEx<TransactionMetadataParams>();
+            dataList.Add(trans);        
         }
 
         #endregion

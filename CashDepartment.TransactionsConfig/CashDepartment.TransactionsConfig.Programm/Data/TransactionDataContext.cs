@@ -11,13 +11,13 @@ using System.Xml.Serialization;
 
 namespace CashDepartment.TransactionsConfig.Shell.Data
 {
-    public class AllData
+    public class TransactionDataContext
     {
-        private static AllData allData;
+        private static TransactionDataContext transactionDataContext;
         private object dataLocker;
         private ObservableCollection<TransactionMetadataGroup> dataCollection;
 
-        private AllData() 
+        private TransactionDataContext() 
         {
             this.dataLocker = new object();
             this.DataCollection = new ObservableCollection<TransactionMetadataGroup>();
@@ -46,21 +46,21 @@ namespace CashDepartment.TransactionsConfig.Shell.Data
             }
         }      
 
-        static AllData() { }
+        static TransactionDataContext() { }
  
-        public static AllData GetInstance()
+        public static TransactionDataContext GetInstance()
         {
-            if (allData == null)
+            if (transactionDataContext == null)
             {
-                lock (typeof(AllData))
+                lock (typeof(TransactionDataContext))
                 {
-                    if (allData == null)
+                    if (transactionDataContext == null)
                     {
-                        allData = new AllData();
+                        transactionDataContext = new TransactionDataContext();
                     }
                 }
             }
-            return allData;
+            return transactionDataContext;
         }
 
         public ObservableCollection<TransactionMetadataGroup> DataCollection

@@ -42,7 +42,7 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
         public ParamsViewModel()
         {
             this.collectionViewSource = new CollectionViewSource();
-            this.collectionViewSource.Source = AllData.GetInstance().DataCollection;
+            this.collectionViewSource.Source = TransactionDataContext.GetInstance().DataCollection;
             this.collectionViewSource.Filter += collectionViewSource_Filter;
             this.AddNewRowCommand = new RelayCommand(arg => this.AddNewRow(arg));
         }       

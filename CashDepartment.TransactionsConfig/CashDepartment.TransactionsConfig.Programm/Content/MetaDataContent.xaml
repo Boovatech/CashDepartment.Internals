@@ -22,6 +22,7 @@
     <UserControl.Resources>
 
         <myData:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
+        <myData:WidthConverter x:Key="WidthConverter"/>
 
         <ObjectDataProvider x:Key="EnumTransactionEventResult" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
             <ObjectDataProvider.MethodParameters>
@@ -50,7 +51,7 @@
         </ObjectDataProvider>
 
         <DataTemplate x:Key="ListViewMainDataTemplateInterbank">
-            <Grid Margin="0,0,0,0">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
@@ -59,15 +60,32 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Padding="10,2,0,2" Grid.ColumnSpan="2">
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="{Binding TransactionEvent}" FontWeight="Bold" Margin="0,10,0,10"/>
-                        <Label Content="{Binding ODBType}" FontWeight="Bold" Margin="50,10,0,10"/>
-                    </StackPanel>
+                <Border BorderThickness="1" Background="AntiqueWhite" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Padding="10,2,0,2" Grid.ColumnSpan="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Транзакция: " Margin="0,2,25,2"/>
+                        <Label Content="{Binding TransactionEvent}" Grid.Column="1" VerticalAlignment="Center"/>
+                        <Label Content="ODB: " Grid.Row="1" Margin="0,2,0,2"/>
+                        <Label Content="{Binding ODBType}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
+                    </Grid>
                 </Border>
                 <Border BorderThickness="1,0,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" HorizontalAlignment="Left"/>
-                <DataGrid x:Name="dataInclude" ItemsSource="{Binding Metadata}" Grid.Column="1" SelectionMode="Single" AutoGenerateColumns="False" RowHeaderWidth="0" HeadersVisibility="None" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="True" Grid.Row="1" GridLinesVisibility="All" CellStyle="{DynamicResource DataGridCellStyle1}">
+                <Border BorderThickness="1,0,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" HorizontalAlignment="Left" Grid.Column="2"/>
+                <DataGrid x:Name="dataInclude" Loaded="dgMain_Loaded" ItemsSource="{Binding Metadata}" Grid.Column="1" SelectionMode="Single" AutoGenerateColumns="False" RowHeaderWidth="0" HeadersVisibility="None" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="True" Grid.Row="1" GridLinesVisibility="All" CellStyle="{DynamicResource DataGridCellStyle1}">
+                    <DataGrid.Template>
+                        <ControlTemplate>
+                            <ItemsPresenter></ItemsPresenter>
+                        </ControlTemplate>
+                    </DataGrid.Template>
                     <DataGrid.Columns>
                         <!--<DataGridTemplateColumn>
                             <DataGridTemplateColumn.Header>
@@ -108,12 +126,12 @@
                         <DataGridCheckBoxColumn Header="IsPrepaid" Binding="{Binding IsPrepaid}" />
                     </DataGrid.Columns>
                 </DataGrid>
-                <mui:ModernButton Grid.ColumnSpan="2" IconData="F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z " Grid.Row="2"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Command="{Binding DataContext.AddNewRowCommand, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Metadata}"/>
+                <mui:ModernButton IconData="F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z " Grid.Row="1" Grid.RowSpan="3"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="-20,0,0,0" Command="{Binding DataContext.AddNewRowCommand, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Metadata}"/>
             </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="ListViewMainDataTemplateAtm">
-            <Grid Margin="0,0,0,0">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
@@ -122,15 +140,32 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Padding="10,2,0,2" Grid.ColumnSpan="2">
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="{Binding TransactionEvent}" FontWeight="Bold" Margin="0,10,0,10"/>
-                        <Label Content="{Binding ODBType}" FontWeight="Bold" Margin="50,10,0,10"/>
-                    </StackPanel>
+                <Border BorderThickness="1" Background="AntiqueWhite" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Padding="10,2,0,2" Grid.ColumnSpan="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Транзакция: " Margin="0,2,25,2"/>
+                        <Label Content="{Binding TransactionEvent}" Grid.Column="1" VerticalAlignment="Center"/>
+                        <Label Content="ODB: " Grid.Row="1" Margin="0,2,0,2"/>
+                        <Label Content="{Binding ODBType}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
+                    </Grid>                 
                 </Border>
                 <Border BorderThickness="1,0,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" HorizontalAlignment="Left"/>
-                <DataGrid x:Name="dataInclude" ItemsSource="{Binding Metadata}" Grid.Column="1" SelectionMode="Single" AutoGenerateColumns="False" RowHeaderWidth="0" HeadersVisibility="None" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="True" Grid.Row="1" GridLinesVisibility="All" CellStyle="{DynamicResource DataGridCellStyle1}">
+                <Border BorderThickness="1,0,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" HorizontalAlignment="Left" Grid.Column="2"/>
+                <DataGrid x:Name="dataInclude" Loaded="dgMain_Loaded" ItemsSource="{Binding Metadata}" Grid.Column="1" SelectionMode="Single" AutoGenerateColumns="False" RowHeaderWidth="0" HeadersVisibility="None" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="True" Grid.Row="1" GridLinesVisibility="All" CellStyle="{DynamicResource DataGridCellStyle1}">
+                    <DataGrid.Template>
+                        <ControlTemplate>
+                            <ItemsPresenter></ItemsPresenter>
+                        </ControlTemplate>
+                    </DataGrid.Template>
                     <DataGrid.Columns>
                         <DataGridComboBoxColumn Header="Result" ItemsSource="{Binding Source={StaticResource EnumTransactionEventResult}}" SelectedValueBinding="{Binding EventResult}"  >
                             <DataGridComboBoxColumn.EditingElementStyle>
@@ -160,7 +195,7 @@
                         </DataGridComboBoxColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <mui:ModernButton Grid.ColumnSpan="2" IconData="F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z " Grid.Row="2"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Command="{Binding DataContext.AddNewRowCommand, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Metadata}"/>
+                <mui:ModernButton IconData="F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z " Grid.Row="1" Margin="-20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Command="{Binding DataContext.AddNewRowCommand, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Metadata}"/>
             </Grid>
         </DataTemplate>
 
@@ -213,7 +248,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type DataGridCell}">
                         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -248,7 +283,7 @@
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
                 <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
-                <Setter Property="Padding" Value="2,0,0,0"/>
+                <Setter Property="Padding" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListBoxItem}">
@@ -278,14 +313,14 @@
         </Style>
 
         <DataTemplate x:Key="interbankTemplate">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-                <Grid Style="{StaticResource ContentRoot}">
+            <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch">
+                <Grid Style="{StaticResource ContentRoot}" HorizontalAlignment="Stretch" Margin="20,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <!--<ContentControl Content="{Binding DataGridContent,UpdateSourceTrigger=PropertyChanged}"/>-->
-                    <DataGrid x:Name="dgMain" Loaded="dgMain_Loaded"  AutoGenerateColumns="False" RowHeaderWidth="0" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="3,0,0,0" GridLinesVisibility="All" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}" HorizontalAlignment="Left">
+                    <DataGrid x:Name="dgMain" Width="{Binding RelativeSource={RelativeSource AncestorType=ScrollViewer},Path=ActualWidth,Converter={StaticResource WidthConverter}}" HorizontalAlignment="Stretch" ColumnWidth="*" AutoGenerateColumns="False" RowHeaderWidth="0" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="All" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}" >
                         <DataGrid.Columns>
                             <DataGridComboBoxColumn x:Name="colResult" Header="Result"/>
                             <DataGridCheckBoxColumn x:Name="colDefaultCurrency" Header="DefaultCurrency"  />
@@ -302,27 +337,38 @@
                                 <Setter Property="BorderThickness" Value="1"/>
                                 <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
                                 <Setter Property="Padding" Value="10,10,10,10"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center" />
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="Background" Value="Orange" />
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="FontSize" Value="18"/>
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                     </DataGrid>
-                    <ListBox x:Name="lbMain" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataContext.DataCollection, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}}" ItemTemplateSelector="{StaticResource MyDataSelector}" ItemContainerStyle="{DynamicResource LBICS1}"/>
+                    <ListBox x:Name="lbMain" Width="{Binding ElementName=dgMain,Path=ActualWidth}"  HorizontalAlignment="Stretch" Grid.Row="1" ItemsSource="{Binding DataContext.DataCollection, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}}" ItemTemplateSelector="{StaticResource MyDataSelector}" ItemContainerStyle="{DynamicResource LBICS1}">
+                        <ListBox.Template>
+                            <ControlTemplate>
+                                <ItemsPresenter></ItemsPresenter>
+                            </ControlTemplate>
+                        </ListBox.Template>
+                    </ListBox>
                     <!--<ListView ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataCollection}" ItemTemplate="{DynamicResource ListViewMainDataTemplate1}" ItemContainerStyle="{DynamicResource ListViewItemStyle1}"/>-->
                 </Grid>
             </ScrollViewer>
         </DataTemplate>
 
         <DataTemplate x:Key="atmTemplate">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-                <Grid Style="{StaticResource ContentRoot}">
+            <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch">
+                <Grid Style="{StaticResource ContentRoot}" HorizontalAlignment="Stretch" Margin="20,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <!--<ContentControl Content="{Binding DataGridContent,UpdateSourceTrigger=PropertyChanged}"/>-->
-                    <DataGrid x:Name="dgMain" Loaded="dgMain_Loaded" AutoGenerateColumns="False" RowHeaderWidth="0" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="3,0,0,0" GridLinesVisibility="All" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}" HorizontalAlignment="Left">
+                    <DataGrid x:Name="dgMain" Width="{Binding RelativeSource={RelativeSource AncestorType=ScrollViewer},Path=ActualWidth,Converter={StaticResource WidthConverter}}" AutoGenerateColumns="False" HorizontalAlignment="Stretch" RowHeaderWidth="0"  ColumnWidth="*" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="All" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}">
                         <DataGrid.Columns>
                             <DataGridComboBoxColumn x:Name="colResult" Header="Result"/>
-                            <DataGridCheckBoxColumn x:Name="colDefaultCurrency" Header="DefaultCurrency"  />
+                            <DataGridCheckBoxColumn x:Name="colDefaultCurrency" Header="DefaultCurrency"/>
                             <DataGridComboBoxColumn x:Name="colPartyType" Header="CreationTime" />
                             <DataGridCheckBoxColumn x:Name="colIsOurBank" Header="isReserve"  />
                             <DataGridCheckBoxColumn x:Name="colIsResident" Header="isOutCases"  />
@@ -332,15 +378,26 @@
                         </DataGrid.Columns>
                         <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="BorderThickness" Value="1"/>                                
                                 <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
                                 <Setter Property="Padding" Value="10,10,10,10"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center" />
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="Background" Value="Orange" />
+                                <Setter Property="Foreground" Value="White" /> 
+                                <Setter Property="FontSize" Value="18"/>
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                     </DataGrid>
-                    <ListBox x:Name="lbMain" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataContext.DataCollection, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplateSelector="{StaticResource MyDataSelector}" ItemContainerStyle="{DynamicResource LBICS1}"/>
+                    <ListBox x:Name="lbMain" Width="{Binding ElementName=dgMain,Path=ActualWidth}"  HorizontalAlignment="Stretch" Grid.Row="1" ItemsSource="{Binding DataContext.DataCollection, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplateSelector="{StaticResource MyDataSelector}" ItemContainerStyle="{DynamicResource LBICS1}">
+                        <ListBox.Template>
+                            <ControlTemplate>
+                                <ItemsPresenter></ItemsPresenter>
+                            </ControlTemplate>
+                        </ListBox.Template>
+                    </ListBox>
                     <!--<ListView ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataCollection}" ItemTemplate="{DynamicResource ListViewMainDataTemplate1}" ItemContainerStyle="{DynamicResource ListViewItemStyle1}"/>-->
-                </Grid>
+                </Grid>                
             </ScrollViewer>
         </DataTemplate>
 

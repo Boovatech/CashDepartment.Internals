@@ -73,7 +73,9 @@
     <Compile Include="Content\Params.xaml.cs">
       <DependentUpon>Params.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\AllData.cs" />
+    <Compile Include="Data\DataGridColumnBinding.cs" />
+    <Compile Include="Data\WidthConverter.cs" />
+    <Compile Include="Data\TransactionDataContext.cs" />
     <Compile Include="Data\ContentTemplateSelector.cs" />
     <Compile Include="Data\IntToVisibilityConverter.cs" />
     <Compile Include="Data\ListViewMetaDataTemplateSelector.cs" />
