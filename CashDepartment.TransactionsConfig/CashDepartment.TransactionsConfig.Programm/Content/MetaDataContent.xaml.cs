@@ -80,40 +80,7 @@ namespace CashDepartment.TransactionsConfig.Shell.Content
         private void dgMain_Loaded(object sender, RoutedEventArgs e)
         {
             this.ColBinding();
-            //var dg = sender as DataGrid;
-
-
-            //PropertyDescriptor pd = DependencyPropertyDescriptor.FromProperty(DataGridColumn.ActualWidthProperty, typeof(DataGridColumn));
-
-            //foreach (DataGridColumn column in dg.Columns)
-            //{
-            //    pd.AddValueChanged(column, new EventHandler(ColumnWidthPropertyChanged));
-            //}
-        }
-
-        //private void ColumnWidthPropertyChanged(object sender, EventArgs e)
-        //{
-        //    var col = sender as DataGridColumn;
-
-        //    if (col != null)
-        //    {
-        //        var lb = CashDepartment.TransactionsConfig.Shell.Data.VisualHelper.FindChild<ListBox>(this, "lbMain");
-        //        var items = lb.Items;
-        //        foreach (var item in items)
-        //        {
-        //            var dataG = CashDepartment.TransactionsConfig.Shell.Data.VisualHelper.FindChild<DataGrid>(lb, "dataInclude");
-        //            foreach (var colD in dataG.Columns)
-        //            {
-        //                if (col.Header.ToString() == colD.Header.ToString())
-        //                {
-        //                    colD.Width = col.Width;
-        //                    return;
-        //                }
-        //            }
-        //        }
-
-        //    }
-        //}
+        }       
 
     }
 }

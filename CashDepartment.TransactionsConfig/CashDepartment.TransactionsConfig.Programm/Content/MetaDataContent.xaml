@@ -338,7 +338,7 @@
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                     </DataGrid>
-                    <ListBox x:Name="lbMain" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataContext.DataCollection, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}}" ItemTemplateSelector="{StaticResource MyDataSelector}" ItemContainerStyle="{DynamicResource LBICS1}"/>
+                    <ListBox x:Name="lbMain" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataContext.DataCollection, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplateSelector="{StaticResource MyDataSelector}" ItemContainerStyle="{DynamicResource LBICS1}"/>
                     <!--<ListView ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding DataCollection}" ItemTemplate="{DynamicResource ListViewMainDataTemplate1}" ItemContainerStyle="{DynamicResource ListViewItemStyle1}"/>-->
                 </Grid>
             </ScrollViewer>

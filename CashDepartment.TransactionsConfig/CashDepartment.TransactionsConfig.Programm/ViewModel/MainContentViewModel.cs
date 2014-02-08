@@ -61,7 +61,6 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
         {
             this.TransactionEventsList = EnumHelper.GetLocalizedValuesList(typeof(TransactionEvent)).Select(x=>x.Value).ToList<string>();
             this.TransactionExportODBTypeList = EnumHelper.GetLocalizedValuesList(typeof(TransactionExportODBType)).Select(x => x.Value).ToList<string>();
-            this.isFirstNavigate = true;
             this.GoToParamsOrMetaDataCommand = new RelayCommand(arg => this.GoToParamsOrMetaData(arg));
             this.MySaveCommand = new RelayCommand(arg => this.Save());
             this.AddNewTransactionEventCommand = new RelayCommand(arg => this.AddNewTransactionEven());           
@@ -158,8 +157,7 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
                 case BusinessProcessSourceType.Client:
                     break;
                 case BusinessProcessSourceType.Interbank:
-                    meta = new InterbankEncashTransactionMetadata();
-                    
+                    meta = new InterbankEncashTransactionMetadata();                    
                     break;
                 case BusinessProcessSourceType.Terminal:
                     break;
@@ -174,46 +172,17 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
             metaDataList.Add(meta);         
 
             tmg.Metadata = metaDataList;
-            AllData.GetInstance().DataCollection.Add(tmg);
 
-            ////временное решение
-            //var frame = VisualHelper.FindChild<ModernFrame>(App.Current.Windows[0], "myContentFrame");            
-            //System.Windows.Input.NavigationCommands.Refresh.Execute(null, frame);  
-            var tmp = this.FrameSource;
-            this.FrameSource = null;
-            this.FrameSource = tmp;
+            AllData.GetInstance().AddToDataCollection(tmg);           
         }
 
 
         internal void NavigateTo(string currentBusinessProcessSourceType)
         {
-            //if (this.isFirstNavigate)
-            //{
-                this.currentBusinessProcessSourceType = (BusinessProcessSourceType)Enum.Parse(typeof(BusinessProcessSourceType), currentBusinessProcessSourceType);
-                //this.isFirstNavigate = false;
-                this.FrameSource = null;
-                this.FrameSource = new Uri(string.Format("/Content/MetaDataContent.xaml#{0}", this.currentBusinessProcessSourceType), UriKind.Relative);                
-                ////switch (this.currentBusinessProcessSourceType)
-                ////{
-                ////    case BusinessProcessSourceType.Atm:
-                ////        break;
-                ////    case BusinessProcessSourceType.CashCenter:
-                ////        break;
-                ////    case BusinessProcessSourceType.Client:
-                ////        break;
-                ////    case BusinessProcessSourceType.Interbank:
-                ////        this.FrameSource = new Uri(string.Format("/Content/MetaDataContent.xaml#{0}", this.currentBusinessProcessSourceType), UriKind.Relative);
-                ////        break;
-                ////    case BusinessProcessSourceType.Terminal:
-                ////        break;
-                ////    case BusinessProcessSourceType.Unit:
-                ////        break;
-                ////    case BusinessProcessSourceType.None:
-                ////        break;
-                ////}
-            //}
-
-        }        
+            this.currentBusinessProcessSourceType = (BusinessProcessSourceType)Enum.Parse(typeof(BusinessProcessSourceType), currentBusinessProcessSourceType);
+            this.FrameSource = null;
+            this.FrameSource = new Uri(string.Format("/Content/MetaDataContent.xaml#{0}", this.currentBusinessProcessSourceType), UriKind.Relative);
+        }    
         #endregion
     }
 }

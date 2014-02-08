@@ -6,9 +6,11 @@ using FirstFloor.ModernUI.Presentation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace CashDepartment.TransactionsConfig.Shell.ViewModel
 {
@@ -17,17 +19,18 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
          #region Data
 
         private BusinessProcessSourceType currentBusinessProcessSourceType;
-        private ObservableCollection<TransactionMetadataGroup> dataCollection;
-        private bool isFirstNavigate;        
+        private CollectionViewSource collectionViewSource;      
 
         #endregion
 
         #region Properties
 
-        public ObservableCollection<TransactionMetadataGroup> DataCollection
+        public ICollectionView DataCollection
         {
-            get { return this.dataCollection; }
-            private set { this.dataCollection = value; }
+            get
+            {
+                return this.collectionViewSource.View;
+            }
         }
 
         public RelayCommand AddNewRowCommand { get; set; }
@@ -38,8 +41,9 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
 
         public ParamsViewModel()
         {
-            this.DataCollection = new ObservableCollection<TransactionMetadataGroup>();
-            this.isFirstNavigate = true;
+            this.collectionViewSource = new CollectionViewSource();
+            this.collectionViewSource.Source = AllData.GetInstance().DataCollection;
+            this.collectionViewSource.Filter += collectionViewSource_Filter;
             this.AddNewRowCommand = new RelayCommand(arg => this.AddNewRow(arg));
         }       
 
@@ -47,74 +51,21 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
 
         #region Methods
 
-        internal void FrameNavigate(string currentBusinessProcessSourceType)
+        void collectionViewSource_Filter(object sender, FilterEventArgs e)
         {
-            //if (this.isFirstNavigate)
-            //{
-                this.currentBusinessProcessSourceType = (BusinessProcessSourceType)Enum.Parse(typeof(BusinessProcessSourceType), currentBusinessProcessSourceType);
-                //this.isFirstNavigate = false;
-                switch (this.currentBusinessProcessSourceType)
-                {
-                    case BusinessProcessSourceType.Atm:
-                        break;
-                    case BusinessProcessSourceType.CashCenter:
-                        break;
-                    case BusinessProcessSourceType.Client:
-                        break;
-                    case BusinessProcessSourceType.Interbank:
-                        this.InterbankInit();
-                        break;
-                    case BusinessProcessSourceType.Terminal:
-                        break;
-                    case BusinessProcessSourceType.Unit:
-                        break;
-                    case BusinessProcessSourceType.None:
-                        break;
-                }
-            //}
-
+            e.Accepted = (e.Item as TransactionMetadataGroup).ProcessSourceType == this.currentBusinessProcessSourceType ? true : false;
         }
 
-        private async void InterbankInit()
+        internal void FrameNavigate(string currentBusinessProcessSourceType)
         {
-            await Task.Factory.StartNew(() =>
-            {
-                var curItems = AllData.GetInstance().DataCollection
-                    .Where(
-                    x => x.ProcessSourceType == this.currentBusinessProcessSourceType);
-                App.Current.Dispatcher.BeginInvoke((Action)(() =>
-                    {
-                        this.DataCollection.Clear();
-                        foreach (var item in curItems)
-                        {
-                            this.DataCollection.Add(item);
-                        }
-
-                    }), System.Windows.Threading.DispatcherPriority.DataBind);                
-            });            
+            this.currentBusinessProcessSourceType = (BusinessProcessSourceType)Enum.Parse(typeof(BusinessProcessSourceType), currentBusinessProcessSourceType);
+            this.collectionViewSource.View.Refresh();
         }
 
         private void AddNewRow(object arg)
         {
-            switch (this.currentBusinessProcessSourceType)
-            {
-                case BusinessProcessSourceType.Atm:
-                    break;
-                case BusinessProcessSourceType.CashCenter:
-                    break;
-                case BusinessProcessSourceType.Client:
-                    break;
-                case BusinessProcessSourceType.Interbank:
-                    var dataList = arg as BindingListEx<TransactionMetadataParams>;
-                    dataList.AddNew();
-                    break;
-                case BusinessProcessSourceType.Terminal:
-                    break;
-                case BusinessProcessSourceType.Unit:
-                    break;
-                case BusinessProcessSourceType.None:
-                    break;
-            }
+            var dataList = arg as BindingListEx<TransactionMetadataParams>;
+            dataList.AddNew();
         }
 
         #endregion
