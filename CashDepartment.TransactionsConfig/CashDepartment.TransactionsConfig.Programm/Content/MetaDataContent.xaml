@@ -48,8 +48,8 @@
             <ObjectDataProvider.MethodParameters>
                 <x:Type TypeName="enumEncash:EncashmentReturnType"/>
             </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
-
+        </ObjectDataProvider>        
+        
         <DataTemplate x:Key="ListViewMainDataTemplateInterbank">
             <Grid>
                 <Grid.RowDefinitions>
@@ -103,6 +103,12 @@
                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                 </Style>
                             </DataGridComboBoxColumn.EditingElementStyle>
+                            <DataGridComboBoxColumn.ElementStyle>
+                                <Style TargetType="ComboBox">
+                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridComboBoxColumn.ElementStyle>
                         </DataGridComboBoxColumn>
                         <DataGridCheckBoxColumn Header="DefaultCurrency" Binding="{Binding ForDefaultCurrency}" />
                         <DataGridComboBoxColumn Header="PartyType" ItemsSource="{Binding Source={StaticResource EnumPartyType}}" SelectedValueBinding="{Binding PartyType}" >
@@ -111,6 +117,12 @@
                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                 </Style>
                             </DataGridComboBoxColumn.EditingElementStyle>
+                            <DataGridComboBoxColumn.ElementStyle>
+                                <Style TargetType="ComboBox">
+                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridComboBoxColumn.ElementStyle>
                         </DataGridComboBoxColumn>
                         <DataGridCheckBoxColumn Header="IsOurBank" Binding="{Binding IsOurBank}" />
                         <DataGridCheckBoxColumn Header="IsResident" Binding="{Binding IsResident}" />
@@ -120,6 +132,12 @@
                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                 </Style>
                             </DataGridComboBoxColumn.EditingElementStyle>
+                            <DataGridComboBoxColumn.ElementStyle>
+                                <Style TargetType="ComboBox">
+                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridComboBoxColumn.ElementStyle>
                         </DataGridComboBoxColumn>
                         <DataGridCheckBoxColumn Header="IsExchange" Binding="{Binding IsExchange}" />
                         <DataGridCheckBoxColumn Header="IsDefaultCurrency"  Binding="{Binding IsDefaultCurrency}" />
@@ -173,6 +191,12 @@
                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                 </Style>
                             </DataGridComboBoxColumn.EditingElementStyle>
+                            <DataGridComboBoxColumn.ElementStyle>
+                                <Style TargetType="ComboBox">
+                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridComboBoxColumn.ElementStyle>
                         </DataGridComboBoxColumn>
                         <DataGridCheckBoxColumn Header="DefaultCurrency" Binding="{Binding ForDefaultCurrency}" />
                         <DataGridComboBoxColumn Header="CreationTime" ItemsSource="{Binding Source={StaticResource EnumOperatingTime}}" SelectedValueBinding="{Binding RelativeSource={RelativeSource Findancestor, AncestorType={x:Type DataGrid}}, Path=DataContext.OperatingTime}" >
@@ -181,6 +205,12 @@
                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                 </Style>
                             </DataGridComboBoxColumn.EditingElementStyle>
+                            <DataGridComboBoxColumn.ElementStyle>
+                                <Style TargetType="ComboBox">
+                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridComboBoxColumn.ElementStyle>
                         </DataGridComboBoxColumn>
                         <DataGridCheckBoxColumn Header="isReserve" Binding="{Binding IsReserve}"/>
                         <DataGridCheckBoxColumn Header="isOutCases" Binding="{Binding IsOutOfCases}" />
@@ -192,6 +222,12 @@
                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                 </Style>
                             </DataGridComboBoxColumn.EditingElementStyle>
+                            <DataGridComboBoxColumn.ElementStyle>
+                                <Style TargetType="ComboBox">
+                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridComboBoxColumn.ElementStyle>
                         </DataGridComboBoxColumn>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -203,12 +239,12 @@
         <Style x:Key="DataGridCellStyle1" TargetType="{x:Type DataGridCell}">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderThickness" Value="1"/>            
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type DataGridCell}">
                         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>

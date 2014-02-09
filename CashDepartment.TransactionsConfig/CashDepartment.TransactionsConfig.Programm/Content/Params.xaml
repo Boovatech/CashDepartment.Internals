@@ -139,8 +139,8 @@
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="{Binding Introduction}" HorizontalAlignment="Left" Margin="0,15,0,5" Background="LightGray"/>
-
+                                <TextBlock Text="{Binding Introduction}" HorizontalAlignment="Left" Margin="0,15,0,5" Background="Khaki"/>
+                                <Border BorderThickness="0,1,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Column="1"/>
                                 <DataGrid x:Name="dataInclude" Loaded="dgMain_Loaded1" Grid.Row="1" CanUserReorderColumns="False" ItemsSource="{Binding Params, IsAsync=True}" AutoGenerateColumns="False" GridLinesVisibility="All" RowHeaderWidth="0"  HorizontalAlignment="Stretch" ColumnWidth="*" CanUserAddRows="False" CanUserResizeRows="False" CanUserDeleteRows="True" HeadersVisibility="None" CellStyle="{DynamicResource DataGridCellStyle1}">
                                     <DataGrid.Template>
                                         <ControlTemplate>
@@ -154,6 +154,12 @@
                                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                                 </Style>
                                             </DataGridComboBoxColumn.EditingElementStyle>
+                                            <DataGridComboBoxColumn.ElementStyle>
+                                                <Style TargetType="ComboBox">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridComboBoxColumn.ElementStyle>
                                         </DataGridComboBoxColumn>
                                         <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumAccountType}}" SelectedValueBinding="{Binding DebitType}" Header="DebitType">
                                             <DataGridComboBoxColumn.EditingElementStyle>
@@ -161,6 +167,12 @@
                                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                                 </Style>
                                             </DataGridComboBoxColumn.EditingElementStyle>
+                                            <DataGridComboBoxColumn.ElementStyle>
+                                                <Style TargetType="ComboBox">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridComboBoxColumn.ElementStyle>
                                         </DataGridComboBoxColumn>
                                         <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumBusinessProcessSourceType}}" SelectedValueBinding="{Binding CreditSource}" Header="CreditSource">
                                             <DataGridComboBoxColumn.EditingElementStyle>
@@ -168,6 +180,12 @@
                                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                                 </Style>
                                             </DataGridComboBoxColumn.EditingElementStyle>
+                                            <DataGridComboBoxColumn.ElementStyle>
+                                                <Style TargetType="ComboBox">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridComboBoxColumn.ElementStyle>
                                         </DataGridComboBoxColumn>
                                         <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumAccountType}}" SelectedValueBinding="{Binding CreditType}" Header="CreditType">
                                             <DataGridComboBoxColumn.EditingElementStyle>
@@ -175,6 +193,12 @@
                                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                                 </Style>
                                             </DataGridComboBoxColumn.EditingElementStyle>
+                                            <DataGridComboBoxColumn.ElementStyle>
+                                                <Style TargetType="ComboBox">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridComboBoxColumn.ElementStyle>
                                         </DataGridComboBoxColumn>
                                         <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumTransactionAmount}}" SelectedValueBinding="{Binding Amount}" Header="Amount" >
                                             <DataGridComboBoxColumn.EditingElementStyle>
@@ -182,6 +206,12 @@
                                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                                 </Style>
                                             </DataGridComboBoxColumn.EditingElementStyle>
+                                            <DataGridComboBoxColumn.ElementStyle>
+                                                <Style TargetType="ComboBox">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridComboBoxColumn.ElementStyle>
                                         </DataGridComboBoxColumn>
                                         <DataGridCheckBoxColumn Binding="{Binding IsUnion}" Header="IsUnion"/>
                                         <DataGridCheckBoxColumn Binding="{Binding NeedSymbol}" Header="NeedSymbol" />
@@ -192,6 +222,12 @@
                                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                                 </Style>
                                             </DataGridComboBoxColumn.EditingElementStyle>
+                                            <DataGridComboBoxColumn.ElementStyle>
+                                                <Style TargetType="ComboBox">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridComboBoxColumn.ElementStyle>
                                         </DataGridComboBoxColumn>
                                         <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumTransactionSubtype}}" SelectedValueBinding="{Binding Subtype}" Header="Subtype">
                                             <DataGridComboBoxColumn.EditingElementStyle>
@@ -199,6 +235,12 @@
                                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                                 </Style>
                                             </DataGridComboBoxColumn.EditingElementStyle>
+                                            <DataGridComboBoxColumn.ElementStyle>
+                                                <Style TargetType="ComboBox">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridComboBoxColumn.ElementStyle>
                                         </DataGridComboBoxColumn>
                                         <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumTransactionDocType}}" SelectedValueBinding="{Binding DocType}" Header="DocType">
                                             <DataGridComboBoxColumn.EditingElementStyle>
@@ -206,6 +248,12 @@
                                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                                 </Style>
                                             </DataGridComboBoxColumn.EditingElementStyle>
+                                            <DataGridComboBoxColumn.ElementStyle>
+                                                <Style TargetType="ComboBox">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridComboBoxColumn.ElementStyle>
                                         </DataGridComboBoxColumn>
                                         <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource EnumPaymentPurposeType}}" SelectedValueBinding="{Binding PaymentPurpose}" Header="PaymentPurpose">
                                             <DataGridComboBoxColumn.EditingElementStyle>
@@ -213,6 +261,12 @@
                                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                                 </Style>
                                             </DataGridComboBoxColumn.EditingElementStyle>
+                                            <DataGridComboBoxColumn.ElementStyle>
+                                                <Style TargetType="ComboBox">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridComboBoxColumn.ElementStyle>
                                         </DataGridComboBoxColumn>
                                         <DataGridTextColumn Binding="{Binding AdditionalParams}" Header="AdditionalParams"/>
                                     </DataGrid.Columns>
