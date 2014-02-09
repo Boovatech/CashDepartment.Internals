@@ -25,8 +25,9 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
         #region Data
 
         private BusinessProcessSourceType currentBusinessProcessSourceType;
-        private bool isFirstNavigate;
         private Uri frameSource;
+        private System.Windows.Visibility leftButtonVisibility;
+        private System.Windows.Visibility rightButtonVisibility;
 
         public Uri FrameSource
         {
@@ -53,6 +54,35 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
         public string TransactionEventsSelectedItem { get; set; }
         public string TransactionExportODBTypeSelectedItem { get; set; }
 
+        public System.Windows.Visibility LeftButtonVisibility
+        {
+            get { return this.leftButtonVisibility; }
+
+            private set
+            {
+                if (this.leftButtonVisibility != value)
+                {
+                    this.leftButtonVisibility = value;
+
+                    OnPropertyChanged("LeftButtonVisibility");
+                }
+            }
+        }
+        public System.Windows.Visibility RightButtonVisibility
+        {
+            get { return this.rightButtonVisibility; }
+
+            private set
+            {
+                if (this.rightButtonVisibility != value)
+                {
+                    this.rightButtonVisibility = value;
+
+                    OnPropertyChanged("RightButtonVisibility");
+                }
+            }
+        }
+
         #endregion
 
         #region Constructors
@@ -63,7 +93,8 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
             this.TransactionExportODBTypeList = EnumHelper.GetLocalizedValuesList(typeof(TransactionExportODBType)).Select(x => x.Value).ToList<string>();
             this.GoToParamsOrMetaDataCommand = new RelayCommand(arg => this.GoToParamsOrMetaData(arg));
             this.MySaveCommand = new RelayCommand(arg => this.Save());
-            this.AddNewTransactionEventCommand = new RelayCommand(arg => this.AddNewTransactionEven());           
+            this.AddNewTransactionEventCommand = new RelayCommand(arg => this.AddNewTransactionEven());
+            this.LeftButtonVisibility = System.Windows.Visibility.Hidden;
         }       
       
         #endregion
@@ -78,13 +109,20 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
             {
                 if (mf != null)
                 {
+                    var tcc = VisualHelper.FindChild<TransitioningContentControl>(mf, null);
                     if (!mf.Source.OriginalString.Contains("Params"))
                     {
+                        tcc.Transition = "MyToLeftTransition";
                         System.Windows.Input.NavigationCommands.GoToPage.Execute(string.Format("/Content/Params.xaml#{0}", this.currentBusinessProcessSourceType), mf);
+                        this.LeftButtonVisibility = System.Windows.Visibility.Visible;
+                        this.RightButtonVisibility = System.Windows.Visibility.Hidden;
                     }
                     else
                     {
+                        tcc.Transition = "MyToRightTransition";
                         System.Windows.Input.NavigationCommands.GoToPage.Execute(string.Format("/Content/MetaDataContent.xaml#{0}", this.currentBusinessProcessSourceType), mf);
+                        this.LeftButtonVisibility = System.Windows.Visibility.Hidden;
+                        this.RightButtonVisibility = System.Windows.Visibility.Visible;
                     }
                 }
             }
@@ -182,6 +220,8 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
             this.currentBusinessProcessSourceType = (BusinessProcessSourceType)Enum.Parse(typeof(BusinessProcessSourceType), currentBusinessProcessSourceType);
             this.FrameSource = null;
             this.FrameSource = new Uri(string.Format("/Content/MetaDataContent.xaml#{0}", this.currentBusinessProcessSourceType), UriKind.Relative);
+            this.LeftButtonVisibility = System.Windows.Visibility.Hidden;
+            this.RightButtonVisibility = System.Windows.Visibility.Visible;
         }    
         #endregion
     }

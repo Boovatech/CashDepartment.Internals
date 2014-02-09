@@ -1,21 +1,23 @@
 ﻿namespace CashDepartment.TransactionsConfig.Shell.Content
 {
+    using CashDepartment.TransactionsConfig.Shell.Data;
     using CashDepartment.TransactionsConfig.Shell.ViewModel;
-using FirstFloor.ModernUI.Windows;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+    using FirstFloor.ModernUI.Windows;
+    using FirstFloor.ModernUI.Windows.Controls;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Documents;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using System.Windows.Navigation;
+    using System.Windows.Shapes;
 
     /// <summary>
     /// Interaction logic for MainContent.xaml
@@ -30,6 +32,13 @@ using System.Windows.Shapes;
 
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
+
+            var tcc = VisualHelper.FindChild<TransitioningContentControl>(this, null);
+            if (tcc != null)
+            {
+                tcc.Transition = "ModernUITransition";
+            }
+
             var currentBusinessProcessSourceType = e.Fragment;
             (this.DataContext as MainContentViewModel).NavigateTo(currentBusinessProcessSourceType); 
         }
@@ -48,7 +57,7 @@ using System.Windows.Shapes;
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
-
+            
         }
     }
 }

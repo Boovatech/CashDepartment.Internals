@@ -7,20 +7,238 @@
              xmlns:myViewModel="clr-namespace:CashDepartment.TransactionsConfig.Shell.ViewModel"
              xmlns:myData="clr-namespace:CashDepartment.TransactionsConfig.Shell.Data"
              mc:Ignorable="d"              
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300" x:Name="MainContentControl">
 
     <UserControl.DataContext>
         <myViewModel:MainContentViewModel/>
     </UserControl.DataContext> 
     
     <UserControl.Resources>
+
+        <myData:ZnakConverter x:Key="ZnakConverter"/>
+
         <Style TargetType="mui:TransitioningContentControl">
             <!--DefaultTransition - Fade in/out
                 Normal - no Animation
                 UpTransition - up Animation
                 DownTransition - down Animation
                 ModernUITransition - Slide/Fade by Left-->
-            <Setter Property="Transition" Value="DownTransition" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="IsTabStop" Value="True" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="Transition" Value="Normal" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="mui:TransitioningContentControl">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="PresentationStates">
+                                    <VisualState x:Name="DefaultTransition">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="CurrentContentPresentationSite" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0" />
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00.300" Value="1" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="PreviousContentPresentationSite" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1" />
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00.300" Value="0" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="PreviousContentPresentationSite" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Collapsed</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+
+                                    <VisualState x:Name="UpTransition">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="CurrentContentPresentationSite" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0" />
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00.300" Value="1" />
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="CurrentContentPresentationSite" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="30" />
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00.300" Value="0" />
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="PreviousContentPresentationSite" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1" />
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00.300" Value="0" />
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="PreviousContentPresentationSite" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0" />
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00.300" Value="-30" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+
+                                    <VisualState x:Name="DownTransition">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="CurrentContentPresentationSite" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0" />
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00.300" Value="1" />
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="CurrentContentPresentationSite" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="-40" />
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00.300" Value="0" />
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="PreviousContentPresentationSite" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1" />
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00.300" Value="0" />
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="PreviousContentPresentationSite" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0" />
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00.300" Value="40" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+
+                                    <VisualState x:Name="ModernUITransition">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="CurrentContentPresentationSite" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0" />
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00.400" Value="1" />
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <DoubleAnimation BeginTime="00:00:00" Duration="00:00:00.500" Storyboard.TargetName="CurrentContentPresentationSite" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" From="-50" To="0">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase  EasingMode="EaseOut"/>
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+
+                                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="PreviousContentPresentationSite" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1" />
+                                                <SplineDoubleKeyFrame KeyTime="00:00:00.100" Value="0" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+
+                                    <VisualState x:Name="SlideLeftTransition_In">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames
+	           Storyboard.TargetName="CurrentContentPresentationSite"
+	           Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                                                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-90"/>
+                                                <EasingDoubleKeyFrame KeyTime="00:00:00.4" Value="-90"/>
+                                                <EasingDoubleKeyFrame KeyTime="00:00:00.7" Value="0">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames
+	            Storyboard.TargetName="CurrentContentPresentationSite"
+            Storyboard.TargetProperty="(UIElement.Opacity)">
+                                                <DiscreteDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                                                <DiscreteDoubleKeyFrame KeyTime="00:00:00.4" Value="1"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames
+	            Storyboard.TargetName="PreviousContentPresentationSite"
+	            Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Collapsed</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+
+                                    <VisualState x:Name="MyToLeftTransition">
+                                        <Storyboard>
+                                            <DoubleAnimation
+	                                        BeginTime="00:00:00" Duration="00:00:00.75"
+	                                        Storyboard.TargetName="PreviousContentPresentationSite"
+	                                        Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
+	                                        From="0" To="{Binding Source={x:Reference MainContentControl},Path=ActualWidth,Converter={StaticResource ZnakConverter}}"/>
+
+                                            <DoubleAnimation
+	                                        BeginTime="00:00:00" Duration="00:00:00.75"
+	                                        Storyboard.TargetName="CurrentContentPresentationSite"
+	                                        Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
+	                                        From="{Binding Source={x:Reference MainContentControl},Path=ActualWidth}" To="0"/>
+
+                                            <ObjectAnimationUsingKeyFrames
+	                                        Storyboard.TargetName="CurrentContentPresentationSite"
+                                            Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:00.75">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Collapsed</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+
+                                    <VisualState x:Name="MyToRightTransition">
+                                        <Storyboard>
+                                            <DoubleAnimation
+	                                        BeginTime="00:00:00" Duration="00:00:00.75"
+	                                        Storyboard.TargetName="CurrentContentPresentationSite"
+	                                        Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
+	                                        From="{Binding Source={x:Reference MainContentControl},Path=ActualWidth,Converter={StaticResource ZnakConverter}}" To="0"/>
+
+                                            <DoubleAnimation
+	                                        BeginTime="00:00:00" Duration="00:00:00.75"
+	                                        Storyboard.TargetName="PreviousContentPresentationSite"
+	                                        Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
+	                                        From="0" To="{Binding Source={x:Reference MainContentControl},Path=ActualWidth}"/> 
+
+                                            <ObjectAnimationUsingKeyFrames
+	                                        Storyboard.TargetName="CurrentContentPresentationSite"
+                                            Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:00.75">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Collapsed</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2" x:Name="BorderMain">
+                                <Grid>
+                                    <ContentPresenter x:Name="PreviousContentPresentationSite" Content="{x:Null}" ContentTemplate="{TemplateBinding ContentTemplate}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                        <ContentPresenter.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform />
+                                                <SkewTransform />
+                                                <RotateTransform />
+                                                <TranslateTransform />
+                                            </TransformGroup>
+                                        </ContentPresenter.RenderTransform>
+                                    </ContentPresenter>
+
+                                    <ContentPresenter x:Name="CurrentContentPresentationSite" Content="{x:Null}" ContentTemplate="{TemplateBinding ContentTemplate}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                        <ContentPresenter.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform />
+                                                <SkewTransform />
+                                                <RotateTransform />
+                                                <TranslateTransform />
+                                            </TransformGroup>
+                                        </ContentPresenter.RenderTransform>
+                                    </ContentPresenter>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </UserControl.Resources>
 
@@ -30,8 +248,14 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Grid.Column="1">
             <Label Content="Транзакция:" VerticalAlignment="Center"/>
             <ComboBox MinWidth="100" Margin="10,0,0,0" VerticalAlignment="Center" ItemsSource="{Binding TransactionEventsList}" SelectedItem="{Binding TransactionEventsSelectedItem}" SelectedIndex="0"/>
             <Label Content="ODB Type:" Margin="30,0,0,0" VerticalAlignment="Center"/>
@@ -39,17 +263,21 @@
             <mui:ModernButton IconData="F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z " EllipseDiameter="24" IconWidth="14" IconHeight="14" Margin="30,0,0,0" VerticalAlignment="Center" Command="{Binding AddNewTransactionEventCommand}"/>
         </StackPanel>
 
-            <mui:ModernFrame Source="{Binding FrameSource, UpdateSourceTrigger=PropertyChanged}" x:Name="myContentFrame" Grid.Row="1" Padding="4"/>
+            <mui:ModernFrame Source="{Binding FrameSource, UpdateSourceTrigger=PropertyChanged}" x:Name="myContentFrame" Grid.Row="1" Grid.Column="1" Padding="4"/>
         <!--<ListView x:Name="dsa" ItemsSource="{Binding DataCollection}" Grid.Row="1" ItemTemplate="{DynamicResource ListViewMainDataTemplate1}"/>-->
+
+        <mui:ModernButton EllipseDiameter="32" IconWidth="20" IconHeight="20" EllipseStrokeThickness="2" Grid.Row="1" IconData="F1 M 57,42L 57,34L 32.25,34L 42.25,24L 31.75,24L 17.75,38L 31.75,52L 42.25,52L 32.25,42L 57,42 Z " HorizontalAlignment="Left" Command="{Binding GoToParamsOrMetaDataCommand}" CommandParameter="{Binding ElementName=myContentFrame}" Visibility="{Binding LeftButtonVisibility,UpdateSourceTrigger=PropertyChanged}"/>
+        <mui:ModernButton EllipseDiameter="32" IconWidth="20" IconHeight="20" EllipseStrokeThickness="2" Grid.Row="1" Grid.Column="2" IconData="F1 M 19.0002,34L 19.0002,42L 43.7502,42L 33.7502,52L 44.2502,52L 58.2502,38L 44.2502,24L 33.7502,24L 43.7502,34L 19.0002,34 Z " HorizontalAlignment="Left" Command="{Binding GoToParamsOrMetaDataCommand}" CommandParameter="{Binding ElementName=myContentFrame}" Visibility="{Binding RightButtonVisibility,UpdateSourceTrigger=PropertyChanged}"/>
+        <mui:ModernButton EllipseDiameter="32" IconWidth="20" IconHeight="20" EllipseStrokeThickness="2" Grid.Row="2" Grid.Column="1" IconData="F1 M 48,39L 56,39L 56,49L 63.25,49L 52,60.25L 40.75,49L 48,49L 48,39 Z M 20,20L 50.25,20L 56,25.75L 56,38L 52,38L 52,27.25L 48.75,24L 48,24L 48,37L 28,37L 28,24L 24,24L 24,52L 42.25,52L 46.25,56L 20,56L 20,20 Z M 39,24L 39,34L 44,34L 44,24L 39,24 Z "  Content="Save" HorizontalAlignment="Right" Command="{Binding MySaveCommand}"/>
         
-        <Grid Grid.Row="2">
+        <!--<Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <mui:ModernButton EllipseDiameter="32" IconWidth="20" IconHeight="20" EllipseStrokeThickness="2" Content="Switch data" IconData="F1 M 52,54L 44,54L 44,29.25L 35.9999,37.25L 35.9999,26.75L 48,14.75L 59.9999,26.75L 59.9999,37.25L 52,29.25L 52,54 Z M 23.9999,22L 31.9999,22L 31.9999,46.75L 40,38.75L 40,49.25L 27.9999,61.25L 16,49.25L 16,38.75L 23.9999,46.75L 23.9999,22 Z " HorizontalAlignment="Left" Command="{Binding GoToParamsOrMetaDataCommand}" CommandParameter="{Binding ElementName=myContentFrame}"/>
             <mui:ModernButton EllipseDiameter="32" IconWidth="20" IconHeight="20" EllipseStrokeThickness="2" IconData="F1 M 48,39L 56,39L 56,49L 63.25,49L 52,60.25L 40.75,49L 48,49L 48,39 Z M 20,20L 50.25,20L 56,25.75L 56,38L 52,38L 52,27.25L 48.75,24L 48,24L 48,37L 28,37L 28,24L 24,24L 24,52L 42.25,52L 46.25,56L 20,56L 20,20 Z M 39,24L 39,34L 44,34L 44,24L 39,24 Z " Grid.Column="1" Content="Save" HorizontalAlignment="Right" Command="{Binding MySaveCommand}"/>
-        </Grid>
+        </Grid>-->
         
     </Grid>
 </UserControl>

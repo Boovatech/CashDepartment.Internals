@@ -80,6 +80,7 @@
     <Compile Include="Data\IntToVisibilityConverter.cs" />
     <Compile Include="Data\ListViewMetaDataTemplateSelector.cs" />
     <Compile Include="Data\VisualHelper.cs" />
+    <Compile Include="Data\ZnakConverter.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\MetaDataContentViewModel.cs" />
