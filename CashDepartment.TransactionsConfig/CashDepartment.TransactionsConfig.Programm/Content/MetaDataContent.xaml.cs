@@ -32,7 +32,7 @@ namespace CashDepartment.TransactionsConfig.Shell.Content
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
             var currentBusinessProcessSourceType = e.Fragment;
-            (this.DataContext as MetaDataContentViewModel).NavigateTo(currentBusinessProcessSourceType);            
+            (this.DataContext as MetaDataContentViewModel).NavigateTo(currentBusinessProcessSourceType);
         }
 
         public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
@@ -47,13 +47,13 @@ namespace CashDepartment.TransactionsConfig.Shell.Content
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
-
-        }        
+            
+        }
 
         private void dgMain_Loaded(object sender, RoutedEventArgs e)
         {
             DataGridColumnBinding.GetInstance().BindingRun();
-        }  
+        } 
 
     }
 }

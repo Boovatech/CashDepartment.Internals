@@ -73,8 +73,8 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
         }
 
         internal void NavigateTo(string currentBusinessProcessSourceType)
-        {
-            this.CurrentBusinessProcessSourceType = (BusinessProcessSourceType)Enum.Parse(typeof(BusinessProcessSourceType), currentBusinessProcessSourceType);
+        {            
+            this.CurrentBusinessProcessSourceType = (BusinessProcessSourceType)Enum.Parse(typeof(BusinessProcessSourceType), currentBusinessProcessSourceType);    
             this.collectionViewSource.View.Refresh();
         }             
 

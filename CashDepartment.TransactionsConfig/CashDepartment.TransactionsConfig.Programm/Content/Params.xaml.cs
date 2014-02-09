@@ -1,4 +1,5 @@
-﻿using CashDepartment.TransactionsConfig.Shell.ViewModel;
+﻿using CashDepartment.TransactionsConfig.Shell.Data;
+using CashDepartment.TransactionsConfig.Shell.ViewModel;
 using FirstFloor.ModernUI.Windows;
 using System;
 using System.Collections.Generic;
@@ -46,6 +47,11 @@ namespace CashDepartment.TransactionsConfig.Shell.Content
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
 
+        }
+
+        private void dgMain_Loaded1(object sender, RoutedEventArgs e)
+        {
+            DataGridColumnBinding.GetInstance().BindingRun();
         }
     }
 }

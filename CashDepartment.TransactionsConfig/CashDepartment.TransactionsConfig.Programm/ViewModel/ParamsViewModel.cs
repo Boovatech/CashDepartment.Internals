@@ -43,7 +43,7 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
         {
             this.collectionViewSource = new CollectionViewSource();
             this.collectionViewSource.Source = TransactionDataContext.GetInstance().DataCollection;
-            this.collectionViewSource.Filter += collectionViewSource_Filter;
+            this.collectionViewSource.Filter += collectionViewSource_Filter;          
             this.AddNewRowCommand = new RelayCommand(arg => this.AddNewRow(arg));
         }       
 
@@ -66,6 +66,10 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
         {
             var dataList = arg as BindingListEx<TransactionMetadataParams>;
             dataList.AddNew();
+            if (dataList.Count == 1)
+            {
+                DataGridColumnBinding.GetInstance().BindingRun();
+            }
         }
 
         #endregion

@@ -43,6 +43,7 @@
             (this.DataContext as MainContentViewModel).NavigateTo(currentBusinessProcessSourceType); 
         }
 
+
         public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
 
