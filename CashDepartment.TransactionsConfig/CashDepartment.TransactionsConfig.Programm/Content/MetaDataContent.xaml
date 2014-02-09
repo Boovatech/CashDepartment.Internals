@@ -80,7 +80,7 @@
                 </Border>
                 <Border BorderThickness="1,0,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" HorizontalAlignment="Left"/>
                 <Border BorderThickness="1,0,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" HorizontalAlignment="Left" Grid.Column="2"/>
-                <DataGrid x:Name="dataInclude" VirtualizingPanel.IsVirtualizing="True" Loaded="dgMain_Loaded" ItemsSource="{Binding Metadata, IsAsync=True}" Grid.Column="1" SelectionMode="Single" AutoGenerateColumns="False" RowHeaderWidth="0" HeadersVisibility="None" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="True" Grid.Row="1" GridLinesVisibility="All" CellStyle="{DynamicResource DataGridCellStyle1}">
+                <DataGrid x:Name="dataInclude" VirtualizingPanel.IsVirtualizing="True" Loaded="dgMain_Loaded" ItemsSource="{Binding Metadata, IsAsync=True}" CanUserReorderColumns="False"  Grid.Column="1" SelectionMode="Single" AutoGenerateColumns="False" RowHeaderWidth="0" HeadersVisibility="None" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="True" Grid.Row="1" GridLinesVisibility="All" CellStyle="{DynamicResource DataGridCellStyle1}">
                     <DataGrid.Template>
                         <ControlTemplate>
                             <ItemsPresenter></ItemsPresenter>
@@ -97,33 +97,33 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>-->
-                        <DataGridComboBoxColumn Header="Result" ItemsSource="{Binding Source={StaticResource EnumTransactionEventResult}, IsAsync=True}" SelectedValueBinding="{Binding EventResult}" >
+                        <DataGridComboBoxColumn Header="Result" ItemsSource="{Binding Source={StaticResource EnumTransactionEventResult}}" SelectedValueBinding="{Binding EventResult}" >
                             <DataGridComboBoxColumn.EditingElementStyle>
                                 <Style TargetType="{x:Type ComboBox}">
                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                 </Style>
                             </DataGridComboBoxColumn.EditingElementStyle>
                         </DataGridComboBoxColumn>
-                        <DataGridCheckBoxColumn Header="DefaultCurrency" Binding="{Binding ForDefaultCurrency, IsAsync=True}" />
-                        <DataGridComboBoxColumn Header="PartyType" ItemsSource="{Binding Source={StaticResource EnumPartyType}, IsAsync=True}" SelectedValueBinding="{Binding PartyType}" >
+                        <DataGridCheckBoxColumn Header="DefaultCurrency" Binding="{Binding ForDefaultCurrency}" />
+                        <DataGridComboBoxColumn Header="PartyType" ItemsSource="{Binding Source={StaticResource EnumPartyType}}" SelectedValueBinding="{Binding PartyType}" >
                             <DataGridComboBoxColumn.EditingElementStyle>
                                 <Style TargetType="{x:Type ComboBox}">
                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                 </Style>
                             </DataGridComboBoxColumn.EditingElementStyle>
                         </DataGridComboBoxColumn>
-                        <DataGridCheckBoxColumn Header="IsOurBank" Binding="{Binding IsOurBank, IsAsync=True}" />
-                        <DataGridCheckBoxColumn Header="IsResident" Binding="{Binding IsResident, IsAsync=True}" />
-                        <DataGridComboBoxColumn Header="Solvency" ItemsSource="{Binding Source={StaticResource EnumEnquirySolvency}, IsAsync=True}" SelectedValueBinding="{Binding Solvency}" >
+                        <DataGridCheckBoxColumn Header="IsOurBank" Binding="{Binding IsOurBank}" />
+                        <DataGridCheckBoxColumn Header="IsResident" Binding="{Binding IsResident}" />
+                        <DataGridComboBoxColumn Header="Solvency" ItemsSource="{Binding Source={StaticResource EnumEnquirySolvency}}" SelectedValueBinding="{Binding Solvency}" >
                             <DataGridComboBoxColumn.EditingElementStyle>
                                 <Style TargetType="{x:Type ComboBox}">
                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                 </Style>
                             </DataGridComboBoxColumn.EditingElementStyle>
                         </DataGridComboBoxColumn>
-                        <DataGridCheckBoxColumn Header="IsExchange" Binding="{Binding IsExchange, IsAsync=True}" />
-                        <DataGridCheckBoxColumn Header="IsDefaultCurrency"  Binding="{Binding IsDefaultCurrency, IsAsync=True}" />
-                        <DataGridCheckBoxColumn Header="IsPrepaid" Binding="{Binding IsPrepaid, IsAsync=True}" />
+                        <DataGridCheckBoxColumn Header="IsExchange" Binding="{Binding IsExchange}" />
+                        <DataGridCheckBoxColumn Header="IsDefaultCurrency"  Binding="{Binding IsDefaultCurrency}" />
+                        <DataGridCheckBoxColumn Header="IsPrepaid" Binding="{Binding IsPrepaid}" />
                     </DataGrid.Columns>
                 </DataGrid>
                 <mui:ModernButton IconData="F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z " Grid.Row="1" Grid.RowSpan="3"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="-20,0,0,0" Command="{Binding DataContext.AddNewRowCommand, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Metadata}"/>
@@ -160,33 +160,33 @@
                 </Border>
                 <Border BorderThickness="1,0,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" HorizontalAlignment="Left"/>
                 <Border BorderThickness="1,0,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" HorizontalAlignment="Left" Grid.Column="2"/>
-                <DataGrid x:Name="dataInclude" Loaded="dgMain_Loaded" VirtualizingPanel.IsVirtualizing="True" ItemsSource="{Binding Metadata, IsAsync=True}" Grid.Column="1" SelectionMode="Single" AutoGenerateColumns="False" RowHeaderWidth="0" HeadersVisibility="None" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="True" Grid.Row="1" GridLinesVisibility="All" CellStyle="{DynamicResource DataGridCellStyle1}">
+                <DataGrid x:Name="dataInclude" Loaded="dgMain_Loaded" VirtualizingPanel.IsVirtualizing="True" CanUserReorderColumns="False" ItemsSource="{Binding Metadata, IsAsync=True}" Grid.Column="1" SelectionMode="Single" AutoGenerateColumns="False" RowHeaderWidth="0" HeadersVisibility="None" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="True" Grid.Row="1" GridLinesVisibility="All" CellStyle="{DynamicResource DataGridCellStyle1}">
                     <DataGrid.Template>
                         <ControlTemplate>
                             <ItemsPresenter></ItemsPresenter>
                         </ControlTemplate>
                     </DataGrid.Template>
                     <DataGrid.Columns>
-                        <DataGridComboBoxColumn Header="Result" ItemsSource="{Binding Source={StaticResource EnumTransactionEventResult}, IsAsync=True}" SelectedValueBinding="{Binding EventResult}"  >
+                        <DataGridComboBoxColumn Header="Result" ItemsSource="{Binding Source={StaticResource EnumTransactionEventResult}}" SelectedValueBinding="{Binding EventResult}"  >
                             <DataGridComboBoxColumn.EditingElementStyle>
                                 <Style TargetType="{x:Type ComboBox}">
                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                 </Style>
                             </DataGridComboBoxColumn.EditingElementStyle>
                         </DataGridComboBoxColumn>
-                        <DataGridCheckBoxColumn Header="DefaultCurrency" Binding="{Binding ForDefaultCurrency, IsAsync=True}" />
-                        <DataGridComboBoxColumn Header="CreationTime" ItemsSource="{Binding Source={StaticResource EnumOperatingTime}, IsAsync=True}" SelectedValueBinding="{Binding RelativeSource={RelativeSource Findancestor, AncestorType={x:Type DataGrid}}, Path=DataContext.OperatingTime}" >
+                        <DataGridCheckBoxColumn Header="DefaultCurrency" Binding="{Binding ForDefaultCurrency}" />
+                        <DataGridComboBoxColumn Header="CreationTime" ItemsSource="{Binding Source={StaticResource EnumOperatingTime}}" SelectedValueBinding="{Binding RelativeSource={RelativeSource Findancestor, AncestorType={x:Type DataGrid}}, Path=DataContext.OperatingTime}" >
                             <DataGridComboBoxColumn.EditingElementStyle>
                                 <Style TargetType="{x:Type ComboBox}">
                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
                                 </Style>
                             </DataGridComboBoxColumn.EditingElementStyle>
                         </DataGridComboBoxColumn>
-                        <DataGridCheckBoxColumn Header="isReserve" Binding="{Binding IsReserve, IsAsync=True}"/>
-                        <DataGridCheckBoxColumn Header="isOutCases" Binding="{Binding IsOutOfCases, IsAsync=True}" />
-                        <DataGridCheckBoxColumn Header="withoutDoc" Binding="{Binding WithoutDocument, IsAsync=True}" />
-                        <DataGridCheckBoxColumn Header="isReturn" Binding="{Binding IsReturn, IsAsync=True}" />
-                        <DataGridComboBoxColumn Header="ReturnType" ItemsSource="{Binding Source={StaticResource EnumReturnType}, IsAsync=True}" SelectedValueBinding="{Binding ReturnType}" >
+                        <DataGridCheckBoxColumn Header="isReserve" Binding="{Binding IsReserve}"/>
+                        <DataGridCheckBoxColumn Header="isOutCases" Binding="{Binding IsOutOfCases}" />
+                        <DataGridCheckBoxColumn Header="withoutDoc" Binding="{Binding WithoutDocument}" />
+                        <DataGridCheckBoxColumn Header="isReturn" Binding="{Binding IsReturn}" />
+                        <DataGridComboBoxColumn Header="ReturnType" ItemsSource="{Binding Source={StaticResource EnumReturnType}}" SelectedValueBinding="{Binding ReturnType}" >
                             <DataGridComboBoxColumn.EditingElementStyle>
                                 <Style TargetType="{x:Type ComboBox}">
                                     <Setter Property="IsDropDownOpen" Value="True"></Setter>
@@ -198,47 +198,7 @@
                 <mui:ModernButton IconData="F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z " Grid.Row="1" Margin="-20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Command="{Binding DataContext.AddNewRowCommand, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Metadata}"/>
             </Grid>
         </DataTemplate>
-
-        <Style x:Key="ListViewItemStyle1" TargetType="{x:Type ListViewItem}">
-            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="Foreground" Value="{DynamicResource ItemText}"/>
-            <Setter Property="Padding" Value="5,2"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ListViewItem}">
-                        <Grid Background="{TemplateBinding Background}">
-                            <Border x:Name="Selection" Visibility="Collapsed"/>
-                            <GridViewRowPresenter Columns="{TemplateBinding GridView.ColumnCollection}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Grid.RowSpan="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Visibility="Collapsed" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="GridView.ColumnCollection" Value="{x:Null}">
-                                <Setter Property="Visibility" TargetName="contentPresenter" Value="Visible"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Visibility" TargetName="Selection" Value="Visible"/>
-                                <Setter Property="Background" TargetName="Selection" Value="{DynamicResource ItemBackgroundHover}"/>
-                                <Setter Property="Foreground" Value="{DynamicResource ItemTextHover}"/>
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="True">
-                                <!--<Setter Property="Visibility" TargetName="Selection" Value="Visible"/>
-        						<Setter Property="Background" TargetName="Selection" Value="{DynamicResource ItemBackgroundSelected}"/>
-        						<Setter Property="Foreground" Value="{DynamicResource ItemTextSelected}"/>-->
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Foreground" Value="{DynamicResource ItemTextDisabled}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        
         <SolidColorBrush x:Key="{x:Static DataGrid.FocusBorderBrushKey}" Color="#FF000000"/>
         <Style x:Key="DataGridCellStyle1" TargetType="{x:Type DataGridCell}">
             <Setter Property="Background" Value="Transparent"/>
@@ -320,7 +280,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <!--<ContentControl Content="{Binding DataGridContent,UpdateSourceTrigger=PropertyChanged}"/>-->
-                    <DataGrid x:Name="dgMain" Width="{Binding RelativeSource={RelativeSource AncestorType=ScrollViewer},Path=ActualWidth,Converter={StaticResource WidthConverter}}" HorizontalAlignment="Stretch" ColumnWidth="*" AutoGenerateColumns="False" RowHeaderWidth="0" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="All" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}" >
+                    <DataGrid x:Name="dgMain" Width="{Binding RelativeSource={RelativeSource AncestorType=ScrollViewer},Path=ActualWidth,Converter={StaticResource WidthConverter}}" CanUserReorderColumns="False" HorizontalAlignment="Stretch" ColumnWidth="*" AutoGenerateColumns="False" RowHeaderWidth="0" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="All" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}" >
                         <DataGrid.Columns>
                             <DataGridComboBoxColumn x:Name="colResult" Header="Result"/>
                             <DataGridCheckBoxColumn x:Name="colDefaultCurrency" Header="DefaultCurrency"  />
@@ -365,7 +325,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <!--<ContentControl Content="{Binding DataGridContent,UpdateSourceTrigger=PropertyChanged}"/>-->
-                    <DataGrid x:Name="dgMain" Width="{Binding RelativeSource={RelativeSource AncestorType=ScrollViewer},Path=ActualWidth,Converter={StaticResource WidthConverter}}" AutoGenerateColumns="False" HorizontalAlignment="Stretch" RowHeaderWidth="0"  ColumnWidth="*" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="All" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}">
+                    <DataGrid x:Name="dgMain" Width="{Binding RelativeSource={RelativeSource AncestorType=ScrollViewer},Path=ActualWidth,Converter={StaticResource WidthConverter}}" CanUserReorderColumns="False" AutoGenerateColumns="False" HorizontalAlignment="Stretch" RowHeaderWidth="0"  ColumnWidth="*" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="All" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}">
                         <DataGrid.Columns>
                             <DataGridComboBoxColumn x:Name="colResult" Header="Result"/>
                             <DataGridCheckBoxColumn x:Name="colDefaultCurrency" Header="DefaultCurrency"/>
@@ -389,7 +349,7 @@
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                     </DataGrid>
-                    <ListBox x:Name="lbMain" VirtualizingPanel.IsVirtualizing="True" Width="{Binding ElementName=dgMain,Path=ActualWidth}"  HorizontalAlignment="Stretch" Grid.Row="1" ItemsSource="{Binding DataContext.DataCollection, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplateSelector="{StaticResource MyDataSelector}" ItemContainerStyle="{DynamicResource LBICS1}">
+                    <ListBox x:Name="lbMain" VirtualizingPanel.IsVirtualizing="True" Width="{Binding ElementName=dgMain,Path=ActualWidth}"  HorizontalAlignment="Stretch" Grid.Row="1" ItemsSource="{Binding DataContext.DataCollection, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}, Mode=OneWay}" ItemTemplateSelector="{StaticResource MyDataSelector}" ItemContainerStyle="{DynamicResource LBICS1}">
                         <ListBox.Template>
                             <ControlTemplate>
                                 <ItemsPresenter></ItemsPresenter>
