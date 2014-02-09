@@ -46,8 +46,12 @@ namespace CashDepartment.TransactionsConfig.Shell.Data
         {
             lock (this.dataLocker)
             {
-                var lb = VisualHelper.FindChild<ListBox>(App.Current.MainWindow, "lbMain");
-                var dg = VisualHelper.FindChild<DataGrid>(App.Current.MainWindow, "dgMain");
+                var uc = VisualHelper.FindChild<UserControl>(App.Current.MainWindow, "MainContentControl");
+                var mf = VisualHelper.FindChild<FirstFloor.ModernUI.Windows.Controls.ModernFrame>(uc, "myContentFrame");
+                var tcc = VisualHelper.FindChild<FirstFloor.ModernUI.Windows.Controls.TransitioningContentControl>(mf, null);
+                var ccps = VisualHelper.FindChild<ContentPresenter>(tcc, "CurrentContentPresentationSite") as ContentPresenter;
+                var lb = VisualHelper.FindChild<ListBox>(ccps, "lbMain");
+                var dg = VisualHelper.FindChild<DataGrid>(ccps, "dgMain");
                 var items = lb.Items;
 
                 foreach (var item in items)

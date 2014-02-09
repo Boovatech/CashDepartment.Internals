@@ -113,7 +113,7 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
                     if (!mf.Source.OriginalString.Contains("Params"))
                     {
                         tcc.Transition = "MyToLeftTransition";
-                        System.Windows.Input.NavigationCommands.GoToPage.Execute(string.Format("/Content/Params.xaml#{0}", this.currentBusinessProcessSourceType), mf);
+                        System.Windows.Input.NavigationCommands.GoToPage.Execute(string.Format("/Content/Params.xaml#{0}", this.currentBusinessProcessSourceType), mf);                    
                         this.LeftButtonVisibility = System.Windows.Visibility.Visible;
                         this.RightButtonVisibility = System.Windows.Visibility.Hidden;
                     }
