@@ -82,7 +82,6 @@
     <Compile Include="Data\VisualHelper.cs" />
     <Compile Include="Data\ZnakConverter.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
-    <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\MetaDataContentViewModel.cs" />
     <Compile Include="ViewModel\MainContentViewModel.cs" />
     <Compile Include="ViewModel\ParamsViewModel.cs" />

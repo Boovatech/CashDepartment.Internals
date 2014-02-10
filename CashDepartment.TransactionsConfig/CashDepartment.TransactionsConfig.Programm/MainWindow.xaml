@@ -9,7 +9,7 @@
     <mui:ModernWindow.MenuLinkGroups>
         <mui:LinkGroup GroupName="MetaDataGroup">
             <mui:LinkGroup.Links>
-                <mui:Link Source="/Pages/Home.xaml" />
+                <mui:Link Source="/Pages/Home.xaml"/>
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="settings" GroupName="settings">

@@ -1,28 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FirstFloor.ModernUI.Windows;
+using FirstFloor.ModernUI.Windows.Controls;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CashDepartment.TransactionsConfig.Shell.Pages
 {
     /// <summary>
     /// Interaction logic for Home.xaml
     /// </summary>
-    public partial class Home : UserControl
+    public partial class Home : UserControl, IContent
     {
         public Home()
         {
             InitializeComponent();
+        }
+
+        public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
+        {
+            
+        }
+
+        public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {
+            
+        }
+
+        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {            
+            if(e.NavigationType == FirstFloor.ModernUI.Windows.Navigation.NavigationType.Back)
+            {
+                var menuCollection = (App.Current.MainWindow as ModernWindow).MenuLinkGroups.First((x) => { return x.GroupName == "MetaDataGroup"; });
+                if (menuCollection != null && menuCollection.Links.Count > 0)
+                {
+                    while (menuCollection.Links.Count > 1)
+                    {
+                        menuCollection.Links.RemoveAt(1);
+                    }                                      
+                }
+            }
+        }
+
+        public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
+        {
+            
         }
     }
 }

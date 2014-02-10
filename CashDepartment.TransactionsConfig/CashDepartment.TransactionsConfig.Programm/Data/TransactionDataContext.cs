@@ -27,14 +27,20 @@ namespace CashDepartment.TransactionsConfig.Shell.Data
         {
             try
             {
-                //System.Threading.Thread.Sleep(5000);
-                this.ClearData();
+                App.Current.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    this.dataCollection.Clear();
+                }));
                 if (File.Exists(path))
                 {
                     XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<TransactionMetadataGroup>));
                     using (StreamReader sr = new StreamReader(path))
                     {
-                        this.dataCollection = xml.Deserialize(sr) as ObservableCollection<TransactionMetadataGroup>;
+                        var collection = xml.Deserialize(sr) as ObservableCollection<TransactionMetadataGroup>;
+                        App.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            this.dataCollection = collection;
+                        }));
                     }
                 }
             }
@@ -89,9 +95,15 @@ namespace CashDepartment.TransactionsConfig.Shell.Data
             }
         }
 
-        private void ClearData()
+        public void CreateNewData()
         {
-            this.dataCollection.Clear();
+            lock (this.dataLocker)
+            {
+                App.Current.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    this.dataCollection.Clear();
+                }));
+            }    
         }
     }
 }

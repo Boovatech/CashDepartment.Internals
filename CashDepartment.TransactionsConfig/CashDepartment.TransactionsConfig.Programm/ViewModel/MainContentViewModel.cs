@@ -8,13 +8,8 @@ using FirstFloor.ModernUI.Windows.Controls;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Xml.Serialization;
 
 namespace CashDepartment.TransactionsConfig.Shell.ViewModel
