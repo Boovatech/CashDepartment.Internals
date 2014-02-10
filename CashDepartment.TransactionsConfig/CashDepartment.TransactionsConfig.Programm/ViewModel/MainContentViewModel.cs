@@ -207,6 +207,7 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
             }
 
             meta.Params = new Shared.ComponentModel.BindingListEx<TransactionMetadataParams>();
+            meta.Params.AddNew();
             metaDataList.Add(meta);         
 
             tmg.Metadata = metaDataList;

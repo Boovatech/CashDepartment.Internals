@@ -96,7 +96,8 @@
         </Style>
         
         <DataTemplate x:Key="ListViewMainDataTemplate1">
-            <Grid Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}},Path=Width}">
+            <!--<Grid Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}},Path=Width}">-->
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
@@ -126,7 +127,7 @@
                 <Border BorderThickness="1,0,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" HorizontalAlignment="Left"/>
                 <Border BorderThickness="1,0,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" HorizontalAlignment="Left" Grid.Column="2"/>
                 <Border BorderThickness="0,1,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Grid.Column="1"/>
-                <ListBox  VirtualizingPanel.IsVirtualizing="True" ItemsSource="{Binding Metadata}" Grid.Column="1" SelectionMode="Single" Grid.Row="1" ItemContainerStyle="{DynamicResource LBICS1}">
+                <ListBox VirtualizingPanel.IsVirtualizing="True" ItemsSource="{Binding Metadata}" Grid.Column="1" SelectionMode="Single" Grid.Row="1" ItemContainerStyle="{DynamicResource LBICS1}">
                     <ListBox.Template>
                         <ControlTemplate>
                             <ItemsPresenter></ItemsPresenter>
@@ -271,7 +272,7 @@
                                         <DataGridTextColumn Binding="{Binding AdditionalParams}" Header="AdditionalParams"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <mui:ModernButton IconData="F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z " Grid.Row="1" Margin="-23,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Command="{Binding RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}, Path=DataContext.AddNewRowCommand}" CommandParameter="{Binding Params}"/>
+                                <mui:ModernButton IconData="F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z " Grid.Row="1" Grid.RowSpan="3" Margin="-22,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Command="{Binding RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}, Path=DataContext.AddNewRowCommand}" CommandParameter="{Binding Params}"/>
                             </Grid>
                         </DataTemplate>                                
                     </ListBox.ItemTemplate>
@@ -361,7 +362,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <DataGrid x:Name="dgMain" Width="{Binding ElementName=sv,Path=ActualWidth,Converter={StaticResource WidthConverter}}" CanUserReorderColumns="False" AutoGenerateColumns="False" HorizontalAlignment="Stretch" RowHeaderWidth="0"  ColumnWidth="*" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="All" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}">
+            <DataGrid x:Name="dgMain" Width="{Binding ElementName=sv,Path=ActualWidth,Converter={StaticResource WidthConverter}}" CanUserReorderColumns="False" HorizontalAlignment="Stretch" ColumnWidth="*" AutoGenerateColumns="False" RowHeaderWidth="0" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="All" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}">
                 <DataGrid.Columns>                    
                     <DataGridTextColumn x:Name="colDebitSource" Header="DebitSource" />
                     <DataGridTextColumn x:Name="colDebitType" Header="DebitType" />

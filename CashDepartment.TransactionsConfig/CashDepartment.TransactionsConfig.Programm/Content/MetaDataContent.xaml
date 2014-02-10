@@ -356,7 +356,7 @@
         <DataTemplate x:Key="atmTemplate">
             <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch">
                 <Grid Style="{StaticResource ContentRoot}" HorizontalAlignment="Stretch" Margin="20,0,0,0">
-                    <Grid.RowDefinitions>
+                    <Grid.RowDefinitions>                        
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
