@@ -385,7 +385,7 @@
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                     </DataGrid>
-                    <ListBox x:Name="lbMain" VirtualizingPanel.IsVirtualizing="True" Width="{Binding ElementName=dgMain,Path=ActualWidth}"  HorizontalAlignment="Stretch" Grid.Row="1" ItemsSource="{Binding DataContext.DataCollection, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}, Mode=OneWay}" ItemTemplateSelector="{StaticResource MyDataSelector}" ItemContainerStyle="{DynamicResource LBICS1}">
+                    <ListBox x:Name="lbMain" VirtualizingPanel.IsVirtualizing="True" Width="{Binding ElementName=dgMain,Path=ActualWidth}" HorizontalAlignment="Stretch" Grid.Row="1" ItemsSource="{Binding DataContext.DataCollection, RelativeSource={RelativeSource Findancestor, AncestorType={x:Type UserControl}}, Mode=OneWay}" ItemTemplateSelector="{StaticResource MyDataSelector}" ItemContainerStyle="{DynamicResource LBICS1}">
                         <ListBox.Template>
                             <ControlTemplate>
                                 <ItemsPresenter></ItemsPresenter>
