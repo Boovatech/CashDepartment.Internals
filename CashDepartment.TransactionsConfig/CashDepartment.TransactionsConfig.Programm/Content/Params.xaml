@@ -127,7 +127,7 @@
                 <Border BorderThickness="1,0,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" HorizontalAlignment="Left"/>
                 <Border BorderThickness="1,0,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" HorizontalAlignment="Left" Grid.Column="2"/>
                 <Border BorderThickness="0,1,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Grid.Column="1"/>
-                <ListBox VirtualizingPanel.IsVirtualizing="True" ItemsSource="{Binding Metadata}" Grid.Column="1" SelectionMode="Single" Grid.Row="1" ItemContainerStyle="{DynamicResource LBICS1}">
+                <ListBox VirtualizingPanel.IsVirtualizing="True" ItemsSource="{Binding Metadata}" Grid.Column="1" SelectionMode="Single" Grid.Row="1" ItemContainerStyle="{DynamicResource LBICS1}" HorizontalContentAlignment="Stretch">
                     <ListBox.Template>
                         <ControlTemplate>
                             <ItemsPresenter></ItemsPresenter>
@@ -140,7 +140,9 @@
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="{Binding Introduction}" HorizontalAlignment="Left" Margin="0,15,0,5" Background="Khaki"/>
+                                <Grid HorizontalAlignment="Stretch" Background="AntiqueWhite">
+                                    <TextBlock Text="{Binding Introduction}" HorizontalAlignment="Center" Foreground="#FF911880"/>
+                                </Grid>                                
                                 <Border BorderThickness="0,1,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Column="1"/>
                                 <DataGrid x:Name="dataInclude" Loaded="dgMain_Loaded1" PreviewKeyDown="dataInclude_PreviewKeyDown"  Grid.Row="1" CanUserReorderColumns="False" ItemsSource="{Binding Params, IsAsync=True}" AutoGenerateColumns="False" GridLinesVisibility="All" RowHeaderWidth="0"  HorizontalAlignment="Stretch" ColumnWidth="*" CanUserAddRows="False" CanUserResizeRows="False" CanUserDeleteRows="False" HeadersVisibility="None" CellStyle="{DynamicResource DataGridCellStyle1}">
                                     <DataGrid.Template>
