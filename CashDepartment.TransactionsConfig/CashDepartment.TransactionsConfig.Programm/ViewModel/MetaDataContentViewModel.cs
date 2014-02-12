@@ -54,8 +54,8 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
             this.AddNewRowCommand = new RelayCommand(arg => this.AddNewRow(arg));
             this.collectionViewSource = new CollectionViewSource();
             this.collectionViewSource.Source = TransactionDataContext.GetInstance().DataCollection;
-            this.collectionViewSource.Filter += collectionViewSource_Filter;            
-        }       
+            this.collectionViewSource.Filter += collectionViewSource_Filter;
+        }      
 
         #endregion
 
@@ -78,6 +78,7 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
             Type type = dataList[0].GetType();
             var trans = Activator.CreateInstance(type) as TransactionMetadata;
             trans.Params = new BindingListEx<TransactionMetadataParams>();
+            trans.Params.AddNew();
             dataList.Add(trans);        
         }
 

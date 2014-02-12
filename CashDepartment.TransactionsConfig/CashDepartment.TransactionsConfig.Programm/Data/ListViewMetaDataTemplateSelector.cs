@@ -22,17 +22,20 @@ namespace CashDepartment.TransactionsConfig.Shell.Data
             {
                 TransactionMetadataGroup Item = item as TransactionMetadataGroup;
                 Window window = Application.Current.MainWindow;
-             
-                var metaType = Item.Metadata.First().GetType();
 
-                if (metaType == typeof(InterbankEncashTransactionMetadata))
+                if (Item != null && Item.Metadata.Count > 0)
                 {
-                    return element.FindResource("ListViewMainDataTemplateInterbank") as DataTemplate;
+                    var metaType = Item.Metadata.First().GetType();
+
+                    if (metaType == typeof(InterbankEncashTransactionMetadata))
+                    {
+                        return element.FindResource("ListViewMainDataTemplateInterbank") as DataTemplate;
+                    }
+                    else if (metaType == typeof(AtmInCashTransactionMetadata))
+                    {
+                        return element.FindResource("ListViewMainDataTemplateAtm") as DataTemplate;
+                    }
                 }
-                else if (metaType == typeof(AtmInCashTransactionMetadata))
-                {
-                    return element.FindResource("ListViewMainDataTemplateAtm") as DataTemplate;
-                } 
             }
             return null;
         }

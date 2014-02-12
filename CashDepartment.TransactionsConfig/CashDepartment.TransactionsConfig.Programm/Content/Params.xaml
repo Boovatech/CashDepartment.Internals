@@ -142,7 +142,7 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="{Binding Introduction}" HorizontalAlignment="Left" Margin="0,15,0,5" Background="Khaki"/>
                                 <Border BorderThickness="0,1,0,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Column="1"/>
-                                <DataGrid x:Name="dataInclude" Loaded="dgMain_Loaded1" Grid.Row="1" CanUserReorderColumns="False" ItemsSource="{Binding Params, IsAsync=True}" AutoGenerateColumns="False" GridLinesVisibility="All" RowHeaderWidth="0"  HorizontalAlignment="Stretch" ColumnWidth="*" CanUserAddRows="False" CanUserResizeRows="False" CanUserDeleteRows="True" HeadersVisibility="None" CellStyle="{DynamicResource DataGridCellStyle1}">
+                                <DataGrid x:Name="dataInclude" Loaded="dgMain_Loaded1" PreviewKeyDown="dataInclude_PreviewKeyDown"  Grid.Row="1" CanUserReorderColumns="False" ItemsSource="{Binding Params, IsAsync=True}" AutoGenerateColumns="False" GridLinesVisibility="All" RowHeaderWidth="0"  HorizontalAlignment="Stretch" ColumnWidth="*" CanUserAddRows="False" CanUserResizeRows="False" CanUserDeleteRows="False" HeadersVisibility="None" CellStyle="{DynamicResource DataGridCellStyle1}">
                                     <DataGrid.Template>
                                         <ControlTemplate>
                                             <ItemsPresenter></ItemsPresenter>
@@ -391,7 +391,7 @@
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
             </DataGrid>
-            <ListBox x:Name="lbMain" VirtualizingPanel.IsVirtualizing="True" Width="{Binding ElementName=dgMain,Path=ActualWidth}"  HorizontalAlignment="Stretch" Grid.Row="1" ItemsSource="{Binding DataCollection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{DynamicResource ListViewMainDataTemplate1}" ItemContainerStyle="{DynamicResource LBICS1}">
+            <ListBox x:Name="lbMain" VirtualizingPanel.IsVirtualizing="True" Width="{Binding ElementName=dgMain,Path=ActualWidth}"  HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Row="1" ItemsSource="{Binding DataCollection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{DynamicResource ListViewMainDataTemplate1}" ItemContainerStyle="{DynamicResource LBICS1}">
                 <ListBox.Template>
                     <ControlTemplate>
                         <ItemsPresenter></ItemsPresenter>

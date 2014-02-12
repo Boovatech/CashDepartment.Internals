@@ -105,5 +105,49 @@ namespace CashDepartment.TransactionsConfig.Shell.Data
                 }));
             }    
         }
+
+        public void RemoveTransactionMetadataFromDataCollection(TransactionMetadata tm)
+        {
+            lock (this.dataLocker)
+            {
+                foreach(var tmdg in this.dataCollection)
+                {
+                    foreach(var tmd in tmdg.Metadata)
+                    {
+                        ////поиск и удаление по ID, когда будет задействован
+                        if(tmd.Equals(tm))
+                        {
+                            tmdg.Metadata.Remove(tm);
+                            if(tmdg.Metadata.Count == 0)
+                            {
+                                this.dataCollection.Remove(tmdg);
+                            }
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+        internal void RemoveTransactionMetadataParamFromDataCollection(TransactionMetadataParams tmp)
+        {
+            lock (this.dataLocker)
+            {
+                foreach (var tmdg in this.dataCollection)
+                {
+                    foreach (var tmd in tmdg.Metadata)
+                    {      
+                        foreach(var tmdp in tmd.Params)
+                        {
+                            if (tmdp.Equals(tmp))
+                            {
+                                tmd.Params.Remove(tmp);
+                                return;
+                            }
+                        }                        
+                    }
+                }
+            }
+        }
     }
 }
