@@ -45,7 +45,10 @@
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
-            
+            if (ModernDialog.ShowMessage("Покинуть режим редактирования данных?\nВсе несохраненные данные будут утеряны.", "навигация", System.Windows.MessageBoxButton.YesNo) == System.Windows.MessageBoxResult.No)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

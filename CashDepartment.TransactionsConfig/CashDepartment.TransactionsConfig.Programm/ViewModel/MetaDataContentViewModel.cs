@@ -21,9 +21,9 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
         #region Properties
 
         public ICollectionView DataCollection
-        {
+        {            
             get
-            {
+            {                
                 return this.collectionViewSource.View;
             }
         }
@@ -40,6 +40,8 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
                 }
             }
         }
+
+        public string d { get { return "dsa"; } }
 
         public RelayCommand AddNewRowCommand { get; set; }
 

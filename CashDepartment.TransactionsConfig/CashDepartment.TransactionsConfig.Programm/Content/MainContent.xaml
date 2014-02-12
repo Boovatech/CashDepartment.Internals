@@ -28,8 +28,8 @@
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="VerticalContentAlignment" Value="Stretch" />
             <Setter Property="Transition" Value="Normal" />
-            <Setter Property="Template">
-                <Setter.Value>
+            <Setter Property="Template">                
+                <Setter.Value>                    
                     <ControlTemplate TargetType="mui:TransitioningContentControl">
                         <Grid>
                             <VisualStateManager.VisualStateGroups>
@@ -209,7 +209,7 @@
                                         </Storyboard>
                                     </VisualState>
                                 </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
+                            </VisualStateManager.VisualStateGroups>                            
                             <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2" x:Name="BorderMain">
                                 <Grid>
                                     <ContentPresenter x:Name="PreviousContentPresentationSite" Content="{x:Null}" ContentTemplate="{TemplateBinding ContentTemplate}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">

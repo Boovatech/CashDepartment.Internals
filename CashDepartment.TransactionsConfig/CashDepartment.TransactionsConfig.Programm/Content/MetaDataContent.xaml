@@ -319,7 +319,7 @@
                     <DataGrid x:Name="dgMain" Width="{Binding RelativeSource={RelativeSource AncestorType=ScrollViewer},Path=ActualWidth,Converter={StaticResource WidthConverter}}" CanUserReorderColumns="False" HorizontalAlignment="Stretch" ColumnWidth="*" AutoGenerateColumns="False" RowHeaderWidth="0" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" GridLinesVisibility="All" Visibility="{Binding DataCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}" >
                         <DataGrid.Columns>
                             <DataGridComboBoxColumn x:Name="colResult" Header="Result"/>
-                            <DataGridCheckBoxColumn x:Name="colDefaultCurrency" Header="DefaultCurrency"  />
+                            <DataGridCheckBoxColumn x:Name="colDefaultCurrency" Header="DefaultCurrency"/>
                             <DataGridComboBoxColumn x:Name="colPartyType" Header="PartyType" />
                             <DataGridCheckBoxColumn x:Name="colIsOurBank" Header="IsOurBank"  />
                             <DataGridCheckBoxColumn x:Name="colIsResident" Header="IsResident"  />

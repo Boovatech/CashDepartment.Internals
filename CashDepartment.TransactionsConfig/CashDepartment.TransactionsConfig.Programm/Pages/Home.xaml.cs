@@ -1,7 +1,9 @@
-﻿using FirstFloor.ModernUI.Windows;
+﻿using CashDepartment.TransactionsConfig.Shell.Data;
+using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Controls;
 using System.Linq;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace CashDepartment.TransactionsConfig.Shell.Pages
 {
@@ -26,8 +28,8 @@ namespace CashDepartment.TransactionsConfig.Shell.Pages
         }
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
-        {            
-            if(e.NavigationType == FirstFloor.ModernUI.Windows.Navigation.NavigationType.Back)
+        {
+            if (e.NavigationType == FirstFloor.ModernUI.Windows.Navigation.NavigationType.New)
             {
                 var menuCollection = (App.Current.MainWindow as ModernWindow).MenuLinkGroups.First((x) => { return x.GroupName == "MetaDataGroup"; });
                 if (menuCollection != null && menuCollection.Links.Count > 0)
@@ -35,7 +37,15 @@ namespace CashDepartment.TransactionsConfig.Shell.Pages
                     while (menuCollection.Links.Count > 1)
                     {
                         menuCollection.Links.RemoveAt(1);
-                    }                                      
+                    }
+                }                
+                var mf = VisualHelper.FindChild<ModernFrame>(App.Current.MainWindow, "ContentFrame");
+                if (mf != null)
+                {
+                    while (NavigationCommands.BrowseBack.CanExecute(null, mf))
+                    {
+                        NavigationCommands.BrowseBack.Execute(null, mf);
+                    }
                 }
             }
         }
