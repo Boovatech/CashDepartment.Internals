@@ -34,11 +34,8 @@ namespace CashDepartment.TransactionsConfig.Shell.Pages
                 var menuCollection = (App.Current.MainWindow as ModernWindow).MenuLinkGroups.First((x) => { return x.GroupName == "MetaDataGroup"; });
                 if (menuCollection != null && menuCollection.Links.Count > 0)
                 {
-                    while (menuCollection.Links.Count > 1)
-                    {
-                        menuCollection.Links.RemoveAt(1);
-                    }
-                }                
+                    menuCollection.Links.Clear();
+                }              
                 var mf = VisualHelper.FindChild<ModernFrame>(App.Current.MainWindow, "ContentFrame");
                 if (mf != null)
                 {

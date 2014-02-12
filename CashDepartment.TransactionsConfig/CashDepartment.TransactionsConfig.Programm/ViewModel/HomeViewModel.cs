@@ -103,10 +103,7 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
             var menuCollection = this.linkGroupCollection.First((x) => { return x.GroupName == "MetaDataGroup"; });
             if (menuCollection != null && menuCollection.Links.Count > 0)
             {
-                while (menuCollection.Links.Count > 1)
-                {
-                    menuCollection.Links.RemoveAt(1);
-                }                
+                menuCollection.Links.Clear();                
             }
         }
         
@@ -116,7 +113,7 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
             if (menuCollection != null && menuCollection.Links.Count > 0)
             {
                 var mf = VisualHelper.FindChild<ModernFrame>(App.Current.MainWindow, "ContentFrame");
-                System.Windows.Input.NavigationCommands.GoToPage.Execute(menuCollection.Links[1].Source.OriginalString, mf);
+                System.Windows.Input.NavigationCommands.GoToPage.Execute(menuCollection.Links[0].Source.OriginalString, mf);
             }             
         }
             //var mf = VisualHelper.FindChild<ModernFrame>(App.Current.MainWindow, "ContentFrame");            
