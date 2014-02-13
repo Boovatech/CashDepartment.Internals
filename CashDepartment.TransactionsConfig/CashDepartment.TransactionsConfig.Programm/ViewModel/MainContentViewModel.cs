@@ -90,6 +90,7 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
             this.MySaveCommand = new RelayCommand(arg => this.Save());
             this.AddNewTransactionEventCommand = new RelayCommand(arg => this.AddNewTransactionEven());
             this.LeftButtonVisibility = System.Windows.Visibility.Hidden;
+            this.RightButtonVisibility = System.Windows.Visibility.Hidden;
         }       
       
         #endregion
@@ -216,8 +217,8 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
             this.currentBusinessProcessSourceType = (BusinessProcessSourceType)Enum.Parse(typeof(BusinessProcessSourceType), currentBusinessProcessSourceType);
             this.FrameSource = null;
             this.FrameSource = new Uri(string.Format("/Content/MetaDataContent.xaml#{0}", this.currentBusinessProcessSourceType), UriKind.Relative);
-            this.LeftButtonVisibility = System.Windows.Visibility.Hidden;
-            this.RightButtonVisibility = System.Windows.Visibility.Visible;
+            //this.LeftButtonVisibility = System.Windows.Visibility.Hidden;
+            //this.RightButtonVisibility = System.Windows.Visibility.Visible;
         }    
         #endregion
     }

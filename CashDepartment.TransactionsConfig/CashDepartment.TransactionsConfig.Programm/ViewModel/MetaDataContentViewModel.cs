@@ -44,6 +44,7 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
         public string d { get { return "dsa"; } }
 
         public RelayCommand AddNewRowCommand { get; set; }
+        public RelayCommand AddNewRowParamCommand { get; set; }
 
         #endregion
 
@@ -52,10 +53,11 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
         public MetaDataContentViewModel()
         {           
             this.AddNewRowCommand = new RelayCommand(arg => this.AddNewRow(arg));
+            this.AddNewRowParamCommand = new RelayCommand(arg => this.AddNewRowParam(arg));
             this.collectionViewSource = new CollectionViewSource();
             this.collectionViewSource.Source = TransactionDataContext.GetInstance().DataCollection;
             this.collectionViewSource.Filter += collectionViewSource_Filter;
-        }      
+        }    
 
         #endregion
 
@@ -81,6 +83,16 @@ namespace CashDepartment.TransactionsConfig.Shell.ViewModel
             trans.Params.AddNew();
             dataList.Add(trans);        
         }
+
+        private void AddNewRowParam(object arg)
+        {
+            var dataList = arg as BindingListEx<TransactionMetadataParams>;
+            dataList.AddNew();
+            if (dataList.Count == 1)
+            {
+                DataGridColumnBinding.GetInstance().BindingRun();
+            }
+        }  
 
         #endregion
     }
